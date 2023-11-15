@@ -1,37 +1,32 @@
 <?php
-include 'php/database.php'; // Assurez-vous que le chemin vers votre script de connexion à la base de données est correct
+include 'php/database.php';
 
-$error = '';
-$success = '';
+$message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password']; // Ce mot de passe devrait être hashé avant d'être stocké
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
 
-    // Vérifiez si l'utilisateur existe déjà
-    $checkUserSql = "SELECT * FROM Users WHERE Username = ?";
-    $stmt = $conn->prepare($checkUserSql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $error = "Un utilisateur avec ce nom existe déjà.";
+    // Validation basique
+    if (empty($username) || empty($password)) {
+        $message = "Veuillez remplir tous les champs.";
     } else {
-        // Insérer le nouvel utilisateur dans la base de données
-        $insertSql = "INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)";
-        if ($insertStmt = $conn->prepare($insertSql)) {
-            $insertStmt->bind_param("ss", $username, $hashed_password);
-            if ($insertStmt->execute()) {
-                $success = "Compte créé avec succès. Vous pouvez maintenant vous connecter.";
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Requête d'insertion
+        $sql = "INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)";
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("ss", $username, $hashed_password);
+            if ($stmt->execute()) {
+                $message = "Compte créé avec succès. <a href='login.php'>Se connecter</a>";
             } else {
-                $error = "Erreur lors de la création du compte.";
+                $message = "Erreur : " . $conn->error; // Affiche les détails de l'erreur SQL
             }
-            $insertStmt->close();
+            $stmt->close();
+        } else {
+            $message = "Erreur de préparation : " . $conn->error;
         }
     }
-    $stmt->close();
 }
 $conn->close();
 ?>
@@ -40,47 +35,27 @@ $conn->close();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un Compte</title>
+    <title>Inscription</title>
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .register-container {
-            margin-top: 80px;
-        }
-        .register-form {
-            margin: 20px;
-        }
-    </style>
 </head>
 <body>
-    <div class="container register-container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h2 class="text-center">Créer un Compte</h2>
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger"><?php echo $error; ?></div>
-                <?php endif; ?>
-                <?php if (!empty($success)): ?>
-                    <div class="alert alert-success"><?php echo $success; ?></div>
-                <?php endif; ?>
-                <form action="register.php" method="post" class="register-form">
-                    <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">S'inscrire</button>
-                </form>
+    <div class="container">
+        <h2>Inscription</h2>
+        <?php if (!empty($message)): ?>
+            <p><?php echo $message; ?></p>
+        <?php endif; ?>
+        <form action="register.php" method="post">
+            <div class="form-group">
+                <label>Nom d'utilisateur</label>
+                <input type="text" name="username" class="form-control">
             </div>
-        </div>
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
     </div>
-
-    <!-- Scripts Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
