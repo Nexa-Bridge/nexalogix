@@ -1,39 +1,70 @@
 <?php
 session_start();
+include 'php/database.php'; // Assurez-vous que le chemin est correct
 
 // Assurez-vous que l'utilisateur est bien dans sa première connexion
-// Sinon, redirigez-le vers la page de connexion ou d'accueil.
+if (!isset($_SESSION['is_first_login']) || !$_SESSION['is_first_login']) {
+    header('Location: login.php');
+    exit();
+}
 
-// Après la validation du formulaire de nouveau mot de passe
-// Mettez à jour le mot de passe et redirigez l'utilisateur vers l'index
+$error = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $new_password = $_POST['new_password'];
+    $confirm_password = $_POST['confirm_password'];
 
+    if ($new_password == $confirm_password) {
+        // Hash du nouveau mot de passe
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+        // Mise à jour du mot de passe dans la base de données
+        $sql = "UPDATE Users SET PasswordHash = ? WHERE UserID = ?";
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("si", $hashed_password, $_SESSION['user_id']);
+            $stmt->execute();
+
+            if ($stmt->affected_rows == 1) {
+                // Réinitialisez la variable de session is_first_login
+                $_SESSION['is_first_login'] = false;
+                header('Location: index.php');
+                exit();
+            } else {
+                $error = "Erreur lors de la mise à jour du mot de passe.";
+            }
+
+            $stmt->close();
+        }
+    } else {
+        $error = "Les mots de passe ne correspondent pas.";
+    }
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Créer un Nouveau Mot de Passe</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Inclure Bootstrap ici si nécessaire -->
 </head>
 <body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="mt-5">Créer un Nouveau Mot de Passe</h2>
-            <form action="" method="post">
-                <!-- Formulaire de nouveau mot de passe -->
-                <div class="form-group">
-                    <label for="new_password">Nouveau mot de passe</label>
-                    <input type="password" class="form-control" name="new_password" id="new_password" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirmez le mot de passe</label>
-                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Créer le mot de passe</button>
-            </form>
-        </div>
+    <div>
+        <h2>Créer un Nouveau Mot de Passe</h2>
+        <?php if (!empty($error)) echo "<p>$error</p>"; ?>
+        <form action="create_password.php" method="post">
+            <div>
+                <label>Nouveau mot de passe:</label>
+                <input type="password" name="new_password" required>
+            </div>
+            <div>
+                <label>Confirmer le mot de passe:</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <div>
+                <button type="submit">Modifier le mot de passe</button>
+            </div>
+        </form>
     </div>
-</div>
 </body>
 </html>
