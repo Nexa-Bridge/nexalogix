@@ -1,3 +1,4 @@
+<?php include '../../session_check.php'; ?>
 <?php include "../includes/header.php"; ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
