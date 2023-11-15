@@ -36,7 +36,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS Bejnyz-0wifsy-syjsox  -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
