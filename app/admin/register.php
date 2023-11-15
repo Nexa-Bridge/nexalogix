@@ -1,31 +1,40 @@
 <?php
-include 'php/database.php';
+session_start();
+include 'php/database.php'; // Assurez-vous que le chemin vers votre script de connexion à la base de données est correct
 
 $message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Validation basique
-    if (empty($username) || empty($password)) {
-        $message = "Veuillez remplir tous les champs.";
-    } else {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "SELECT UserID, PasswordHash, isFirstLogin FROM Users WHERE Username = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Requête d'insertion
-        $sql = "INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)";
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("ss", $username, $hashed_password);
-            if ($stmt->execute()) {
-                $message = "Compte créé avec succès. <a href='login.php'>Se connecter</a>";
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            if (password_verify($password, $row['PasswordHash'])) {
+                $_SESSION['user_id'] = $row['UserID'];
+
+                if ($row['isFirstLogin']) {
+                    // Rediriger vers la page de création de mot de passe
+                    header('Location: create_password.php');
+                    exit();
+                } else {
+                    // Rediriger vers index.php
+                    header('Location: index.php');
+                    exit();
+                }
             } else {
-                $message = "Erreur : " . $conn->error; // Affiche les détails de l'erreur SQL
+                $message = "Mot de passe incorrect.";
             }
-            $stmt->close();
         } else {
-            $message = "Erreur de préparation : " . $conn->error;
+            $message = "Nom d'utilisateur incorrect.";
         }
+        $stmt->close();
     }
 }
 $conn->close();
@@ -35,26 +44,25 @@ $conn->close();
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription</title>
-    <!-- Bootstrap CSS Bejnyz-0wifsy-syjsox  -->
+    <title>Connexion à l'Administration</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h2>Inscription</h2>
+        <h2>Connexion</h2>
         <?php if (!empty($message)): ?>
-            <p><?php echo $message; ?></p>
+            <div class="alert alert-danger"><?php echo $message; ?></div>
         <?php endif; ?>
-        <form action="register.php" method="post">
+        <form action="login.php" method="post">
             <div class="form-group">
                 <label>Nom d'utilisateur</label>
-                <input type="text" name="username" class="form-control">
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label>Mot de passe</label>
-                <input type="password" name="password" class="form-control">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
     </div>
 </body>
