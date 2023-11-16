@@ -33,7 +33,7 @@ if (!isLoggedIn() || !isAdmin()) {
         <h1>Bienvenue dans l'espace d'administration NexaLogix</h1>
         <p>Cette section est réservée aux administrateurs.</p>
         
-        <!-- Menu de navigation -->
+        <!-- Navigation Menu -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Admin Dashboard</a>
@@ -57,20 +57,18 @@ if (!isLoggedIn() || !isAdmin()) {
                         <li class="nav-item">
                             <a class="nav-link" href="logs.php">Journaux d'Audit</a>
                         </li>
-                        <!-- Ajoutez d'autres liens de menu ici -->
+                        <!-- Add more menu links here -->
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Contenu de la page -->
-        <!-- Ici, vous pouvez ajouter d'autres éléments de l'interface d'administration -->
+        <!-- Page Content -->
+        <!-- You can add more admin interface elements here -->
 
     </div>
 
     <!-- Script JS (Bootstrap, jQuery) -->
-    <script src="../path_to_jquery.js"></script> <!-- Ajustez le chemin si nécessaire -->
-    <script src="../path_to_bootstrap.js"></script> <!-- Ajustez le chemin si nécessaire -->
 
     <?php
     // Inclusion du pied de page
