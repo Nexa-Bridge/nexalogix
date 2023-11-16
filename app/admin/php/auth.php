@@ -21,7 +21,7 @@ function login($username, $password) {
         $_SESSION['user_id'] = $user['UserID'];
 
         // Vérifie si l'utilisateur est un administrateur
-        $adminCheckStmt = $pdo->prepare('SELECT RoleID FROM UserRoles WHERE UserID = :userid AND RoleID = (SELECT RoleID FROM Roles WHERE RoleName = "Administrateur")');
+        $adminCheckStmt = $pdo->prepare('SELECT RoleID FROM UserRoles WHERE UserID = :userid AND RoleID = (SELECT RoleID FROM Roles WHERE RoleName = "Admin")');
         $adminCheckStmt->execute(['userid' => $user['UserID']]);
         $_SESSION['is_admin'] = $adminCheckStmt->fetch(PDO::FETCH_ASSOC) ? true : false;
 
