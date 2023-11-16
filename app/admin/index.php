@@ -19,11 +19,6 @@ if (!isLoggedIn() || !isAdmin()) {
 }
 ?>
 
-
-<?php include('../includes/navbar.php'); // Adjust path as necessary ?>
-
-    
-
     <div class="container mt-5">
         <h1 class="text-center mb-4">Bienvenue dans l'Espace d'Administration de NexaLogix</h1>
         <div class="row">
