@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 
 // Inclusion des fichiers nécessaires
 require_once '../includes/header.php';
-require_once '/php/auth.php';
+require_once 'php/auth.php';
 require_once '../php/database.php';
 
 // Vérifier si l'utilisateur est connecté et a le rôle d'administrateur
