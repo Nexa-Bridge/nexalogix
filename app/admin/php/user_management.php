@@ -1,7 +1,7 @@
 <?php
 // Start the session and include necessary files
 session_start();
-require_once '../includes/header.php';
+require_once '../../includes/header.php';
 require_once 'php/auth.php';
 require_once 'php/database.php';
 
@@ -75,4 +75,4 @@ if (!isLoggedIn() || !isAdmin()) {
 </div>
 
 
-<?php require_once '../admin/includes/footer.php'; ?>
+<?php require_once '../../admin/includes/footer.php'; ?>
