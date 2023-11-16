@@ -26,7 +26,7 @@ if (!isLoggedIn() || !isAdmin()) {
 <head>
     <meta charset="UTF-8">
     <title>Espace Administration - NexaLogix</title>
-    <link rel="stylesheet" href="../path_to_bootstrap.css"> <!-- Ajustez le chemin si nécessaire -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784//j6cY/iJTQU5i9i8x0KuX+VIFb2e7Z" crossorigin="anonymous">
 </head>
 <body>
 <div class="container mt-5">
