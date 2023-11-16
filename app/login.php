@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (validateUser($username, $password)) {
         // Identifiants valides, création de la session et redirection
         $_SESSION['userid'] = getUserId($username);
-        header("Location: app/admin/index.php");
+        header("Location: admin/index.php");
         exit;
     } else {
         $error = 'Identifiants incorrects.';
