@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once '/includes/header.php'; // Adjust the path as necessary
+require_once 'includes/header.php'; // Adjust the path as necessary
 
 // Check if the user is already logged in
 if (isLoggedIn()) {
@@ -44,4 +44,4 @@ if (isLoggedIn()) {
     </div>
 </div>
 
-<?php require_once '/includes/includes/footer.php'; ?>
+<?php require_once 'includes/includes/footer.php'; ?>
