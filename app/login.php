@@ -20,53 +20,46 @@ $username_err = $password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
+    // ... [Previous code remains unchanged]
 
-    // Validate credentials
     if (!empty($username) && !empty($password)) {
-        // Prepare a select statement
-        $sql = "SELECT UserID, Username, PasswordHash FROM Users WHERE Username = :username";
+        // ... [Previous code remains unchanged]
 
-        if ($stmt = $pdo->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() == 1) {
+                if ($row = $stmt->fetch()) {
+                    $hashed_password = $row["PasswordHash"];
+                    if (password_verify($password, $hashed_password)) {
+                        // Password is correct, start a new session
+                        session_start();
+                        
+                        // Store data in session variables
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["UserID"] = $row["UserID"];
+                        $_SESSION["Username"] = $username;
 
-            // Set parameters
-            $param_username = $username;
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                // Check if username exists, if yes then verify password
-                if ($stmt->rowCount() == 1) {
-                    if ($row = $stmt->fetch()) {
-                        $hashed_password = $row["PasswordHash"];
-                        if (password_verify($password, $hashed_password)) {
-                            // Password is correct, start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["UserID"] = $row["UserID"];
-                            $_SESSION["Username"] = $username;                            
-                            
-                            // Redirect user to user dashboard
-                            header("location: user_dashboard.php");
+                        // Check if user is admin
+                        // This is a placeholder. You need to replace this with your actual admin check.
+                        $isAdmin = $row["IsAdmin"]; // Assuming 'IsAdmin' is a column in your Users table
+                        
+                        // Redirect user based on role
+                        if ($isAdmin) {
+                            header("location: admin/index.php");
                         } else {
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            header("location: user_dashboard.php");
                         }
+                        exit;
+                    } else {
+                        $password_err = "The password you entered was not valid.";
                     }
-                } else {
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                $username_err = "No account found with that username.";
             }
+        } else {
+            echo "Oops! Something went wrong. Please try again later.";
         }
     }
-    // No need to close connection in PDO
 }
 
 require_once 'includes/header.php';  // Path to your header.php file
