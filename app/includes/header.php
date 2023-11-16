@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NexaLOGIX</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../admin/css/style.css">
-    <script src="../admin/js/script.js"></script>
+    <title>NexaLogix Administration</title>
+    <link href="path_to_bootstrap.css" rel="stylesheet">
+    <link href="app/admin/css/style.css" rel="stylesheet">
 </head>
 <body>

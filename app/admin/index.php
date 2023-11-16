@@ -1,33 +1,38 @@
 <?php
-// Inclure le fichier d'authentification pour vérifier si l'administrateur est connecté
-include_once 'php/auth.php';
+session_start();
+include '../../includes/header.php'; // Assurez-vous que ce chemin est correct
 
-// Vérifier si l'utilisateur demande la déconnexion
-if (isset($_GET['logout'])) {
-    logoutUser();
+// Vérifie si l'utilisateur est connecté et est un administrateur
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../../login.php');
+    exit();
 }
 
-// Ici, vous pouvez ajouter du code pour gérer d'autres fonctionnalités d'administration
+// Vous pouvez ajouter ici une logique supplémentaire pour vérifier si l'utilisateur est un administrateur
+
+// Connexion à la base de données pour récupérer des informations, si nécessaire
+$pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_username', 'your_password');
+
+// Code pour récupérer des informations spécifiques, comme des statistiques, des journaux, etc.
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Administration - NexaLogix</title>
-    <!-- Inclure le fichier CSS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Tableau de Bord Administrateur - NexaLogix</title>
+    <!-- Header inclut déjà les liens Bootstrap -->
 </head>
 <body>
-    <div class="admin-container">
-        <h1>Tableau de Bord Administrateur</h1>
+    <div class="container">
+        <h1>Bienvenue dans le tableau de bord de l'administrateur</h1>
 
-        <!-- Contenu du tableau de bord de l'administrateur -->
-        <p>Bienvenue dans l'espace d'administration de NexaLogix.</p>
+        <!-- Ici, vous pouvez ajouter le contenu spécifique de votre tableau de bord -->
+        <p>Ceci est la page d'accueil de l'administration de NexaLogix.</p>
 
-        <!-- Lien de déconnexion -->
-        <a href="?logout">Déconnexion</a>
-
-        <!-- Ici, vous pouvez ajouter plus de contenu ou de fonctionnalités spécifiques à l'administrateur -->
+        <!-- Vous pouvez inclure des statistiques, des liens vers d'autres pages d'administration, etc. -->
     </div>
+
+    <?php include '../../includes/footer.php'; ?>
 </body>
 </html>
