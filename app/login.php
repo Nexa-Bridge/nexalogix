@@ -1,53 +1,65 @@
 <?php
-session_start();ß
-include 'app/admin/php/database.php'; // Assurez-vous que ce chemin est correct
+session_start();
 
-// Redirige l'utilisateur déjà connecté vers le tableau de bord de l'administration
-if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
-    header('Location: app/admin/index.php');
-    exit();
-}
+// Activez l'affichage des erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'app/admin/php/database.php'; // Assurez-vous que ce chemin est correct
 
 $error = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['password'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['username'], $_POST['password'])) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
 
-    if (empty($username) || empty($password)) {
-        $error = 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe.';
-    } else {
-        // Connexion à la base de données
-        $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_username', 'your_password');
-        $stmt = $pdo->prepare('SELECT UserID, Username, PasswordHash FROM Users WHERE Username = :username');
-        $stmt->execute(['username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($password, $user['PasswordHash'])) {
-            // L'utilisateur est authentifié
-            $_SESSION['user_id'] = $user['UserID'];
-            $_SESSION['username'] = $user['Username'];
-
-            // Vérifie si l'utilisateur est un administrateur
-            $stmt = $pdo->prepare('SELECT r.RoleName FROM Roles r INNER JOIN UserRoles ur ON r.RoleID = ur.RoleID WHERE ur.UserID = :userid');
-            $stmt->execute(['userid' => $user['UserID']]);
-            $roles = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-            $_SESSION['is_admin'] = in_array('Administrateur', $roles);
-            if ($_SESSION['is_admin']) {
-                header('Location: app/admin/index.php');
-                exit();
-            } else {
-                // Redirection pour les utilisateurs non-admin
-                header('Location: app/user_dashboard.php'); // Modifiez selon le besoin
-                exit();
-            }
+        if (empty($username) || empty($password)) {
+            $error = 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe.';
         } else {
-            $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
+            // Connexion à la base de données
+            try {
+                $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_username', 'your_password');
+                $stmt = $pdo->prepare('SELECT UserID, Username, PasswordHash FROM Users WHERE Username = :username');
+                $stmt->execute(['username' => $username]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($user && password_verify($password, $user['PasswordHash'])) {
+                    $_SESSION['user_id'] = $user['UserID'];
+                    $_SESSION['username'] = $user['Username'];
+
+                    // Vérifie si l'utilisateur est un administrateur
+                    $stmt = $pdo->prepare('SELECT r.RoleName FROM Roles r INNER JOIN UserRoles ur ON r.RoleID = ur.RoleID WHERE ur.UserID = :userid');
+                    $stmt->execute(['userid' => $user['UserID']]);
+                    $roles = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+                    if (in_array('Administrateur', $roles)) {
+                        $_SESSION['is_admin'] = true;
+                        header('Location: app/admin/index.php');
+                        exit();
+                    } else {
+                        $_SESSION['is_admin'] = false;
+                        header('Location: app/user_dashboard.php'); // Modifier selon le besoin
+                        exit();
+                    }
+                } else {
+                    $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
+                }
+            } catch (PDOException $e) {
+                $error = "Erreur de connexion à la base de données : " . $e->getMessage();
+            }
         }
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion - NexaLogix</title>
+    <link rel="stylesheet" type="text/css" href="path_to_bootstrap.css">
+</head>
 <body>
     <div class="container">
         <h2>Connexion</h2>
@@ -67,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
-        Lien pour créer un compte administrateur, affiché seulement si nécessaire
         <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a>
     </div>
 
