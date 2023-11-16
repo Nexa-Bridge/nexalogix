@@ -12,7 +12,7 @@ require_once 'admin/php/database.php'; // Assurez-vous que ce chemin est correct
 $error = '';
 $success = '';
 
-include 'app/php/auth.php';
+include 'admin/php/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
