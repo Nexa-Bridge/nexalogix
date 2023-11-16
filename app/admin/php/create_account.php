@@ -1,5 +1,5 @@
 <?php
-include '../../includes/database.php'; // Ajustez le chemin d'accès selon votre structure de dossiers
+include 'app/admin/php/database.php'; // Ajustez le chemin d'accès selon votre structure de dossiers
 
 session_start();
 

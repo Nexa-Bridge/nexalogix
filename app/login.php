@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'app/includes/database.php'; // Assurez-vous que ce chemin mène à votre fichier de connexion à la base de données
+include 'app/admin/php/database.php'; // Assurez-vous que ce chemin mène à votre fichier de connexion à la base de données
 
 // Vérifie si l'utilisateur est déjà connecté
 if (isset($_SESSION['user_id'])) {
