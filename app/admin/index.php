@@ -1,41 +1,33 @@
-<?php 
-include 'session_check.php'; // Inclure le script de vérification de session
-include 'php/database.php'; // Inclure la connexion à la base de données
+<?php
+// Inclure le fichier d'authentification pour vérifier si l'administrateur est connecté
+include_once 'php/auth.php';
 
-// Vous pouvez ajouter ici d'autres logiques PHP nécessaires
+// Vérifier si l'utilisateur demande la déconnexion
+if (isset($_GET['logout'])) {
+    logoutUser();
+}
 
+// Ici, vous pouvez ajouter du code pour gérer d'autres fonctionnalités d'administration
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord de l'Administration</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            padding-top: 20px;
-        }
-        .container {
-            max-width: 1200px;
-        }
-    </style>
+    <title>Administration - NexaLogix</title>
+    <!-- Inclure le fichier CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tableau de Bord de l'Administration</h1>
-        <p>Bienvenue dans le système de gestion d'entrepôt.</p>
+    <div class="admin-container">
+        <h1>Tableau de Bord Administrateur</h1>
 
-        <!-- Ici, vous pouvez ajouter du contenu spécifique à l'administration, comme des statistiques, des tableaux, etc. -->
-        <div>
-            <a href="logout.php" class="btn btn-danger">Déconnexion</a>
-        </div>
+        <!-- Contenu du tableau de bord de l'administrateur -->
+        <p>Bienvenue dans l'espace d'administration de NexaLogix.</p>
+
+        <!-- Lien de déconnexion -->
+        <a href="?logout">Déconnexion</a>
+
+        <!-- Ici, vous pouvez ajouter plus de contenu ou de fonctionnalités spécifiques à l'administrateur -->
     </div>
-
-    <!-- Scripts Bootstrap (JQuery, Popper.js, et Bootstrap JS) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
