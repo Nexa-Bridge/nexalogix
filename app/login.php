@@ -30,7 +30,7 @@ if (isLoggedIn()) {
                     <h4 class="card-title">Connexion</h4>
                 </div>
                 <div class="card-body">
-                    <form action="path_to_login_processing_script.php" method="POST">
+                    <form action="admin/index.php" method="POST">
                         <div class="form-group">
                             <label for="username">Nom d'utilisateur</label>
                             <input type="text" class="form-control" id="username" name="username" required>
