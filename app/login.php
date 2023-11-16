@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe:</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password">
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
