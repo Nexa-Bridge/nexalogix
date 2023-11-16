@@ -12,21 +12,25 @@ require_once 'admin/php/database.php'; // Assurez-vous que ce chemin est correct
 $error = '';
 $success = '';
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+include 'auth.php';
 
-    // Vérifier les identifiants de l'utilisateur
-    if (validateUser($username, $password)) {
-        // Identifiants valides, création de la session et redirection
-        $_SESSION['userid'] = getUserId($username);
-        header("Location: admin/index.php");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if (login($username, $password)) {
+        // Rediriger vers une page en fonction du rôle
+        if (isAdmin()) {
+            header('Location: admin/index.php');
+        } else {
+            header('Location: user_dashboard.php');
+        }
         exit;
     } else {
-        $error = 'Identifiants incorrects.';
+        $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
     }
 }
+
 
 /**
  * Valide les identifiants de l'utilisateur.
