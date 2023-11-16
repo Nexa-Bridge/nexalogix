@@ -7,11 +7,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once 'admin/php/auth.php';
-require_once 'admin/php/database.php'; // This should establish the database connection and assign it to $link
+require_once 'admin/php/database.php'; // This file is your provided PDO connection script
 
 // Check if the user is already logged in
 if (isLoggedIn()) {
-    header('Location: user_dashboard.php'); 
+    header('Location: user_dashboard.php');
     exit;
 }
 
@@ -27,25 +27,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (!empty($username) && !empty($password)) {
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        
-        if ($stmt = mysqli_prepare($link, $sql)) { // Ensure $link is your database connection
+        $sql = "SELECT id, username, password FROM users WHERE username = :username";
+
+        if ($stmt = $pdo->prepare($sql)) { // Use PDO object
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
             // Set parameters
             $param_username = $username;
 
             // Attempt to execute the prepared statement
-            if (mysqli_stmt_execute($stmt)) {
-                // Store result
-                mysqli_stmt_store_result($stmt);
-
+            if ($stmt->execute()) {
                 // Check if username exists, if yes then verify password
-                if (mysqli_stmt_num_rows($stmt) == 1) {                    
-                    // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
-                    if (mysqli_stmt_fetch($stmt)) {
+                if ($stmt->rowCount() == 1) {
+                    if ($row = $stmt->fetch()) {
+                        $id = $row["id"];
+                        $username = $row["username"];
+                        $hashed_password = $row["password"];
                         if (password_verify($password, $hashed_password)) {
                             // Password is correct, start a new session
                             session_start();
@@ -53,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;
                             
                             // Redirect user to welcome page
                             header("location: user_dashboard.php");
@@ -69,14 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
         }
     }
-    
-    // Close connection
-    mysqli_close($link);
+    // No need to close connection in PDO
 }
 
 require_once 'includes/header.php';
