@@ -26,42 +26,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate credentials
     if (!empty($username) && !empty($password)) {
-        // Prepare a select statement
-        $sql = "SELECT UserID, Username, PasswordHash, IsAdmin FROM Users WHERE Username = :username"; // Adjust the query based on your database schema
+        // Prepare a select statement to get user data and roles
+        $sql = "SELECT Users.UserID, Users.Username, Users.PasswordHash, Roles.RoleName 
+                FROM Users 
+                LEFT JOIN UserRoles ON Users.UserID = UserRoles.UserID 
+                LEFT JOIN Roles ON UserRoles.RoleID = Roles.RoleID 
+                WHERE Users.Username = :username";
 
         if ($stmt = $pdo->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
-
-            // Set parameters
             $param_username = $username;
 
-            // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                // Check if username exists, if yes then verify password
                 if ($stmt->rowCount() == 1) {
-                    if ($row = $stmt->fetch()) {
-                        $hashed_password = $row["PasswordHash"];
-                        if (password_verify($password, $hashed_password)) {
-                            // Password is correct, start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["UserID"] = $row["UserID"];
-                            $_SESSION["Username"] = $username;                            
+                    $row = $stmt->fetch();
+                    $hashed_password = $row["PasswordHash"];
+                    if (password_verify($password, $hashed_password)) {
+                        session_start();
+                        $_SESSION["loggedin"] = true;
+                        $_SESSION["UserID"] = $row["UserID"];
+                        $_SESSION["Username"] = $username;                            
 
-                            // Redirect user based on role
-                            $isAdmin = $row["IsAdmin"]; // Assuming 'IsAdmin' is a column in your Users table
-                            if ($isAdmin) {
-                                header("location: admin/index.php"); // Admin dashboard
-                            } else {
-                                header("location: user_dashboard.php"); // User dashboard
-                            }
-                            exit;
+                        // Check user's role and redirect accordingly
+                        $userRole = $row["RoleName"];
+                        if ($userRole == 'admin') {
+                            header("location: admin/index.php"); // Admin dashboard
                         } else {
-                            $password_err = "The password you entered was not valid.";
+                            header("location: user_dashboard.php"); // User dashboard
                         }
+                        exit;
+                    } else {
+                        $password_err = "The password you entered was not valid.";
                     }
                 } else {
                     $username_err = "No account found with that username.";
@@ -71,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    // No need to close the connection in PDO
 }
 
 require_once 'includes/header.php';  // Adjust the path as necessary
