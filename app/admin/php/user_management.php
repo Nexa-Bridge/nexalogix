@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../../includes/header.php'; // Correct the path as needed
-require_once 'php/auth.php'; // Correct the path as needed
-require_once 'php/database.php'; // Correct the path as needed
+require_once 'auth.php'; // Correct the path as needed
+require_once 'database.php'; // Correct the path as needed
 
 // Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
