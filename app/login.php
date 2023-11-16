@@ -1,6 +1,5 @@
 <?php
-session_start();
-include 'app/includes/header.php'
+session_start();ß
 include 'app/admin/php/database.php'; // Assurez-vous que ce chemin est correct
 
 // Redirige l'utilisateur déjà connecté vers le tableau de bord de l'administration
