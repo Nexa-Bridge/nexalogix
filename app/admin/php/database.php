@@ -16,7 +16,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     // Affichage d'un message de succès de connexion (à des fins de débogage, peut être supprimé en production)
-    echo "Connexion à la base de données réussie!";
+    
 } catch (PDOException $e) {
     // Gestion des erreurs de connexion
     die("Erreur de connexion à la base de données: " . $e->getMessage());
