@@ -1,5 +1,4 @@
-<?php include('../includes/header.php'); // Adjust path as necessary ?>
-<?php include('../includes/navbar.php'); // Adjust path as necessary ?>
+<?php include('../admin/includes/header.php'); // Adjust path as necessary ?>
 
     <div class="container mt-5">
         <h1>Gestion des Utilisateurs</h1>

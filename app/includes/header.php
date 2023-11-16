@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="css/custom.css"> <!-- Update this path -->
 </head>
 <body>
+    <?php include('navbar.php'); // Adjust path as necessary ?>
     <header>
         
     </header>
+
+
+
