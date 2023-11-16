@@ -11,7 +11,10 @@ require_once 'admin/php/auth.php';  // Adjust the path as necessary
 require_once 'admin/php/database.php';  // Adjust the path as necessary
 
 // If already logged in, redirect to user dashboard
-
+if (isLoggedIn()) {
+    header('Location: user_dashboard.php');
+    exit;
+}
 
 $username = $password = "";
 $username_err = $password_err = "";
