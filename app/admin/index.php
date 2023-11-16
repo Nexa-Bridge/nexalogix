@@ -2,6 +2,11 @@
 // Démarrage de la session
 session_start();
 
+// Activez l'affichage des erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Inclusion des fichiers nécessaires
 require_once '../includes/header.php';
 require_once '../php/auth.php';

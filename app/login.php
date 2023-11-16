@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Activez l'affichage des erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'app/php/database.php'; // Assurez-vous que ce chemin est correct
 
 // Variables pour stocker les messages d'erreur/confirmation
