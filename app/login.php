@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
                 if (in_array('Administrateur', $roles)) {
                     header('Location: app/admin/index.php');
                 } else {
-                    header('Location: app/index.php'); // Ou tout autre page pour les utilisateurs non-admin
+                    header('Location: app/admin/php/create_account.php'); // Ou tout autre page pour les utilisateurs non-admin
                 }
             }
             exit();
@@ -81,10 +81,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
     <script src="path_to_bootstrap.js"></script>
 </body>
 </html>
-
-
-<?php
-$password = 'admin'; // Remplacez par le mot de passe souhaité
-$hash = password_hash($password, PASSWORD_DEFAULT);
-echo $hash;
-?>
