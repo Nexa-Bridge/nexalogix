@@ -32,7 +32,7 @@ if (!isLoggedIn() || !isAdmin()) {
                     <div class="card-body">
                         <h5 class="card-title">Gestion des Utilisateurs</h5>
                         <p class="card-text">Gérez les comptes utilisateurs, assignez des rôles, et plus.</p>
-                        <a href="user_management.php" class="btn btn-primary">Gérer</a>
+                        <a href="php/user_management.php" class="btn btn-primary">Gérer</a>
                     </div>
                 </div>
             </div>

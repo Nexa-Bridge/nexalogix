@@ -10,7 +10,7 @@
                         <a class="nav-link" href="#">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="user_management.php">Gestion des Utilisateurs</a>
+                        <a class="nav-link" href="../php/user_management.php">Gestion des Utilisateurs</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="role_management.php">Gestion des Rôles</a>
