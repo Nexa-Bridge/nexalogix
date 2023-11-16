@@ -6,13 +6,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'includes/header.php'; // Adjust the path as necessary
+require_once 'includes/header.php';
+require_once 'admin/php/auth.php';
+require_once 'admin/php/database.php';
 
 // Check if the user is already logged in
-if (isLoggedIn() || !isAdmin()) {
+if (isLoggedIn()) {
     header('Location: user_dashboard.php'); // Redirect to the dashboard if already logged in
     exit;
 }
+
 
 // Handle login logic here
 // If login is successful, redirect to the dashboard or another page
