@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include 'database.php'; // Assurez-vous que le chemin d'accès au fichier database.php est correct
 
 function isLoggedIn() {
