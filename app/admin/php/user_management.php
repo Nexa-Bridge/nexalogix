@@ -1,9 +1,13 @@
 <?php
 // Start the session and include necessary files
 session_start();
-require_once '../../includes/header.php';
-require_once 'php/auth.php';
-require_once 'php/database.php';
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require_once '../../includes/header.php'; // Correct the path as needed
+require_once 'php/auth.php'; // Correct the path as needed
+require_once 'php/database.php'; // Correct the path as needed
 
 // Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
@@ -73,4 +77,4 @@ if (!isLoggedIn() || !isAdmin()) {
         </div>
     </div>
 </div>
-<?php require_once '../../includes/footer.php'; ?>
+<?php require_once '../../includes/footer.php'; // Correct the path as needed ?>
