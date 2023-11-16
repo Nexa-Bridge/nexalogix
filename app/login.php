@@ -48,3 +48,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
     }
 }
 ?>
+<body>
+    <div class="container">
+        <h2>Connexion</h2>
+        <?php if ($error): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error; ?>
+            </div>
+        <?php endif; ?>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Connexion</button>
+        </form>
+        <!-- Lien pour créer un compte administrateur, affiché seulement si nécessaire -->
+        <!-- <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a> -->
+    </div>
+
+    <script src="path_to_jquery.js"></script>
+    <script src="path_to_bootstrap.js"></script>
+</body>
+</html>
