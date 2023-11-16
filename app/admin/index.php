@@ -3,10 +3,7 @@ session_start();
 include '../../includes/header.php'; // Assurez-vous que ce chemin est correct
 
 // Vérifie si l'utilisateur est connecté et est un administrateur
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../login.php');
-    exit();
-}
+
 
 // Vous pouvez ajouter ici une logique supplémentaire pour vérifier si l'utilisateur est un administrateur
 
