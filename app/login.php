@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'app/includes/header.php'
 include 'app/admin/php/database.php'; // Assurez-vous que ce chemin est correct
 
 // Redirige l'utilisateur déjà connecté vers le tableau de bord de l'administration
@@ -67,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
-        <!-- Lien pour créer un compte administrateur, affiché seulement si nécessaire -->
-        <!-- <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a> -->
+        Lien pour créer un compte administrateur, affiché seulement si nécessaire
+        <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a>
     </div>
 
     <script src="path_to_jquery.js"></script>
