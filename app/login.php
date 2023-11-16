@@ -6,16 +6,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'admin/php/auth.php';
-require_once 'admin/php/database.php'; // This file is your provided PDO connection script
+require_once 'admin/php/auth.php';  // Path to your auth.php file
+require_once 'admin/php/database.php';  // Path to your database.php file
 
-// Check if the user is already logged in
+// If already logged in, redirect to user dashboard
 if (isLoggedIn()) {
     header('Location: user_dashboard.php');
     exit;
 }
 
-// Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
 
@@ -27,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (!empty($username) && !empty($password)) {
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = :username";
+        $sql = "SELECT UserID, Username, PasswordHash FROM Users WHERE Username = :username";
 
-        if ($stmt = $pdo->prepare($sql)) { // Use PDO object
+        if ($stmt = $pdo->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
@@ -41,27 +40,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Check if username exists, if yes then verify password
                 if ($stmt->rowCount() == 1) {
                     if ($row = $stmt->fetch()) {
-                        $id = $row["id"];
-                        $username = $row["username"];
-                        $hashed_password = $row["password"];
+                        $hashed_password = $row["PasswordHash"];
                         if (password_verify($password, $hashed_password)) {
                             // Password is correct, start a new session
                             session_start();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;
+                            $_SESSION["UserID"] = $row["UserID"];
+                            $_SESSION["Username"] = $username;                            
                             
-                            // Redirect user to welcome page
+                            // Redirect user to user dashboard
                             header("location: user_dashboard.php");
                         } else {
-                            // Password is not valid
+                            // Display an error message if password is not valid
                             $password_err = "The password you entered was not valid.";
                         }
                     }
                 } else {
-                    // Username doesn't exist
+                    // Display an error message if username doesn't exist
                     $username_err = "No account found with that username.";
                 }
             } else {
@@ -72,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // No need to close connection in PDO
 }
 
-require_once 'includes/header.php';
+require_once 'includes/header.php';  // Path to your header.php file
 ?>
 
 <div class="container mt-5">
@@ -100,4 +97,4 @@ require_once 'includes/header.php';
     </div>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once 'includes/footer.php';  // Path to your footer.php file ?>
