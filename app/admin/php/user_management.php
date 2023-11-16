@@ -73,6 +73,4 @@ if (!isLoggedIn() || !isAdmin()) {
         </div>
     </div>
 </div>
-
-
 <?php require_once '../../admin/includes/footer.php'; ?>
