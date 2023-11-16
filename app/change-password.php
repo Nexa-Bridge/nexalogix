@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'app/includes/database.php'; // Ajustez ce chemin selon votre structure de dossiers
+include 'app/php/database.php'; // Ajustez ce chemin selon votre structure de dossiers
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {

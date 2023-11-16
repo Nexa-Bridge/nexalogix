@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../includes/header.php'; // Assurez-vous que ce chemin est correct
+//include '../../includes/header.php'; // Assurez-vous que ce chemin est correct
 
 // Vérifie si l'utilisateur est connecté et est un administrateur
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
