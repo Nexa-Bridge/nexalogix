@@ -1,5 +1,5 @@
-    <footer>
-    <div class="container">
+    <footer class="footer-custom">
+        <div class="container">
             <span>&copy; 2023 NexaLogix Administration</span>
         </div>
     </footer>
