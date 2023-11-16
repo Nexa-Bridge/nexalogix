@@ -1,13 +1,14 @@
 <?php
 // Start the session
 session_start();
+
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'admin/php/auth.php';  // Path to your auth.php file
-require_once 'admin/php/database.php';  // Path to your database.php file
+require_once 'admin/php/auth.php';  // Adjust the path as necessary
+require_once 'admin/php/database.php';  // Adjust the path as necessary
 
 // If already logged in, redirect to user dashboard
 if (isLoggedIn()) {
@@ -20,49 +21,60 @@ $username_err = $password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ... [Previous code remains unchanged]
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
 
+    // Validate credentials
     if (!empty($username) && !empty($password)) {
-        // ... [Previous code remains unchanged]
+        // Prepare a select statement
+        $sql = "SELECT UserID, Username, PasswordHash, IsAdmin FROM Users WHERE Username = :username"; // Adjust the query based on your database schema
 
-        if ($stmt->execute()) {
-            if ($stmt->rowCount() == 1) {
-                if ($row = $stmt->fetch()) {
-                    $hashed_password = $row["PasswordHash"];
-                    if (password_verify($password, $hashed_password)) {
-                        // Password is correct, start a new session
-                        session_start();
-                        
-                        // Store data in session variables
-                        $_SESSION["loggedin"] = true;
-                        $_SESSION["UserID"] = $row["UserID"];
-                        $_SESSION["Username"] = $username;
+        if ($stmt = $pdo->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
 
-                        // Check if user is admin
-                        // This is a placeholder. You need to replace this with your actual admin check.
-                        $isAdmin = $row["IsAdmin"]; // Assuming 'IsAdmin' is a column in your Users table
-                        
-                        // Redirect user based on role
-                        if ($isAdmin) {
-                            header("location: admin/index.php");
+            // Set parameters
+            $param_username = $username;
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                // Check if username exists, if yes then verify password
+                if ($stmt->rowCount() == 1) {
+                    if ($row = $stmt->fetch()) {
+                        $hashed_password = $row["PasswordHash"];
+                        if (password_verify($password, $hashed_password)) {
+                            // Password is correct, start a new session
+                            session_start();
+                            
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["UserID"] = $row["UserID"];
+                            $_SESSION["Username"] = $username;                            
+
+                            // Redirect user based on role
+                            $isAdmin = $row["IsAdmin"]; // Assuming 'IsAdmin' is a column in your Users table
+                            if ($isAdmin) {
+                                header("location: admin/index.php"); // Admin dashboard
+                            } else {
+                                header("location: user_dashboard.php"); // User dashboard
+                            }
+                            exit;
                         } else {
-                            header("location: user_dashboard.php");
+                            $password_err = "The password you entered was not valid.";
                         }
-                        exit;
-                    } else {
-                        $password_err = "The password you entered was not valid.";
                     }
+                } else {
+                    $username_err = "No account found with that username.";
                 }
             } else {
-                $username_err = "No account found with that username.";
+                echo "Oops! Something went wrong. Please try again later.";
             }
-        } else {
-            echo "Oops! Something went wrong. Please try again later.";
         }
     }
+    // No need to close the connection in PDO
 }
 
-require_once 'includes/header.php';  // Path to your header.php file
+require_once 'includes/header.php';  // Adjust the path as necessary
 ?>
 
 <div class="container mt-5">
@@ -90,4 +102,4 @@ require_once 'includes/header.php';  // Path to your header.php file
     </div>
 </div>
 
-<?php require_once 'includes/footer.php';  // Path to your footer.php file ?>
+<?php require_once 'includes/footer.php';  // Adjust the path as necessary ?>
