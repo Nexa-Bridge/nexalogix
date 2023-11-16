@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Check user's role and redirect accordingly
                         $userRole = $row["RoleName"];
-                        if ($userRole == 'admin') {
+                        if ($userRole == 'Admin') {
                             header("location: user_dashboard.php"); // Admin dashboard
                         } else {
                             header("location: admin/index.php"); // User dashboard
