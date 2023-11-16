@@ -11,10 +11,7 @@ require_once 'admin/php/auth.php';  // Adjust the path as necessary
 require_once 'admin/php/database.php';  // Adjust the path as necessary
 
 // If already logged in, redirect to user dashboard
-if (isLoggedIn()) {
-    header('Location: user_dashboard.php');
-    exit;
-}
+
 
 $username = $password = "";
 $username_err = $password_err = "";
@@ -50,9 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // Check user's role and redirect accordingly
                         $userRole = $row["RoleName"];
                         if ($userRole == 'Admin') {
-                            header("location: user_dashboard.php"); // Admin dashboard
+                            header("location: admin/index.php"); // Admin dashboard
                         } else {
-                            header("location: admin/index.php"); // User dashboard
+                            header("location: user_dashboard.php"); // User dashboard
                         }
                         exit;
                     } else {
