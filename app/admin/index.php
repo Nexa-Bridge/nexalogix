@@ -1,35 +1,34 @@
 <?php
-// Démarrage de la session
+// Start the session
 session_start();
 
-// Activez l'affichage des erreurs pour le débogage
+// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inclusion des fichiers nécessaires
+// Include necessary files
 require_once '../includes/header.php';
 require_once 'php/auth.php';
 require_once 'php/database.php';
 
-// Vérifier si l'utilisateur est connecté et a le rôle d'administrateur
+// Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
     header('Location: /login.php');
     exit;
 }
-
-// Contenu de la page d'administration
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaLogix Administration</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784//j6cY/iJTQU5i9i8x0KuX+VIFb2e7Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css"> 
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Espace Administration - NexaLogix</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css"> <!-- Update this path -->
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
@@ -86,21 +85,22 @@ if (!isLoggedIn() || !isAdmin()) {
         </div>
     </div>
 
-  
+    <footer class="footer-custom">
+        <div class="container">
+            <span>&copy; 2023 NexaLogix Administration</span>
+        </div>
+    </footer>
 
-    <!-- Bootstrap and Custom JS -->
+    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="path_to_your_custom.js"></script> <!-- Adjust the path as necessary -->
+    <!-- Custom JS -->
+    <script src="js/custom.js"></script> <!-- Update this path -->
 
-
-     
-
-    </div>
     <?php
-    // Inclusion du pied de page
-    require_once '../includes/footer.php'; // Ajustez le chemin si nécessaire
+    // Include the footer
+    require_once '../includes/footer.php'; // Adjust the path as needed
     ?>
 </body>
 </html>
