@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 require_once 'includes/header.php'; // Adjust the path as necessary
 
 // Check if the user is already logged in
-if (isLoggedIn()) {
+if (isLoggedIn() || !isAdmin()) {
     header('Location: user_dashboard.php'); // Redirect to the dashboard if already logged in
     exit;
 }
