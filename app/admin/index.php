@@ -13,10 +13,10 @@ require_once 'php/auth.php';
 require_once 'php/database.php';
 
 // Vérifier si l'utilisateur est connecté et a le rôle d'administrateur
-if (!isset($_SESSION['userid']) || !checkUserRole($_SESSION['userid'], 'admin')) {
-    header('Location: /login.php');
-    exit;
-}
+//if (!isset($_SESSION['userid']) || !checkUserRole($_SESSION['userid'], 'admin')) {
+//    header('Location: /login.php');
+//    exit;
+//}
 
 // Vérifier si l'utilisateur se connecte pour la première fois
 if (isFirstLogin($_SESSION['userid'])) {
