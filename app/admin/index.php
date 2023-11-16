@@ -74,4 +74,4 @@ if (!isLoggedIn() || !isAdmin()) {
             <!-- Add more cards/sections here -->
         </div>
     </div>
-
+    <?php require_once '../includes/footer.php'; // Adjust the path as needed ?>

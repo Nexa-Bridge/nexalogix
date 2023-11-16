@@ -12,7 +12,7 @@
     <script src="../admin/js/jquery.js"></script>
     <?php
     // Include the footer
-    require_once '../includes/footer.php'; // Adjust the path as needed
+    
     ?>
 </body>
 </html>
