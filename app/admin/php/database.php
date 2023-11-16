@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost:3306";
+$servername = "11.110.0.15";
 $username = "easybiom_logix";
 $password = "nozdu5-dupQeh-pokqex";
 $dbname = "easybiom_nexalogix";
