@@ -12,7 +12,7 @@ require_once 'admin/php/database.php';  // Adjust the path as necessary
 
 // If already logged in, redirect to user dashboard
 if (isLoggedIn()) {
-    header('Location: admin/index.php');
+    header('Location: user_dashboard.php');
     exit;
 }
 
