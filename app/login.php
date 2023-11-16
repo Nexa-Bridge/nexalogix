@@ -7,13 +7,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once 'admin/php/auth.php';
-require_once 'admin/php/database.php';
+require_once 'admin/php/database.php'; // This should establish the database connection and assign it to $link
 
 // Check if the user is already logged in
 if (isLoggedIn()) {
-    header('Location: user_dashboard.php'); // Redirect to the dashboard if already logged in
+    header('Location: user_dashboard.php'); 
     exit;
 }
+
+// Define variables and initialize with empty values
+$username = $password = "";
+$username_err = $password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
         
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($link, $sql)) { // Ensure $link is your database connection
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -54,12 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Redirect user to welcome page
                             header("location: user_dashboard.php");
                         } else {
-                            // Display an error message if password is not valid
+                            // Password is not valid
                             $password_err = "The password you entered was not valid.";
                         }
                     }
                 } else {
-                    // Display an error message if username doesn't exist
+                    // Username doesn't exist
                     $username_err = "No account found with that username.";
                 }
             } else {
