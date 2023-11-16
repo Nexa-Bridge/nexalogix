@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
                 if (in_array('Administrateur', $roles)) {
                     header('Location: app/admin/index.php');
                 } else {
-                    header('Location: user_dashboard.php'); // Ou tout autre page pour les utilisateurs non-admin
+                    header('Location: app/index.php'); // Ou tout autre page pour les utilisateurs non-admin
                 }
             }
             exit();
@@ -74,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
+        <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a>
     </div>
 
     <script src="path_to_jquery.js"></script>
