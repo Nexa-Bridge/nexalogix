@@ -47,4 +47,4 @@ if (isLoggedIn()) {
     </div>
 </div>
 
-<?php require_once 'includes/includes/footer.php'; ?>
+<?php require_once 'includes/footer.php'; ?>

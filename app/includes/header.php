@@ -10,7 +10,20 @@
     <link rel="stylesheet" href="css/custom.css"> <!-- Update this path -->
 </head>
 <body>
-    <?php include('navbar.php'); // Adjust path as necessary ?>
+<?php
+
+
+// Detect if the current script is login.php
+$isLoginPage = basename($_SERVER['PHP_SELF']) == 'login.php';
+
+// Include navbar.php if it's not the login page
+if (!$isLoginPage) {
+    include 'navbar.php'; // Adjust the path if necessary
+}
+
+// Rest of your header content (like loading CSS, etc.)
+?>
+
     <header>
         
     </header>
