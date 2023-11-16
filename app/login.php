@@ -1,36 +1,34 @@
 <?php
 session_start();
-include 'app/admin/php/database.php'; // Assurez-vous que ce chemin mène à votre fichier de connexion à la base de données
+include 'app/admin/php/database.php'; // Assurez-vous que ce chemin est correct
 
-// Vérifie si l'utilisateur est déjà connecté
 if (isset($_SESSION['user_id'])) {
+    // Redirection vers le tableau de bord de l'administrateur
     header('Location: app/admin/index.php');
     exit();
 }
 
 $error = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['password'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['username'], $_POST['password'])) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
 
-    if (empty($username) || empty($password)) {
-        $error = 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe.';
-    } else {
-        // Connexion à la base de données
-        $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_username', 'your_password');
-        $stmt = $pdo->prepare('SELECT UserID, Username, PasswordHash, FirstLogin FROM Users WHERE Username = :username');
-        $stmt->execute(['username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (empty($username) || empty($password)) {
+            $error = 'Veuillez entrer votre nom d\'utilisateur et votre mot de passe.';
+        } else {
+            // Connexion à la base de données
+            // Assurez-vous que les informations de connexion sont correctes
+            $pdo = new PDO('mysql:host=your_host;dbname=your_db', 'your_username', 'your_password');
+            $stmt = $pdo->prepare('SELECT UserID, Username, PasswordHash FROM Users WHERE Username = :username');
+            $stmt->execute(['username' => $username]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['PasswordHash'])) {
-            // L'utilisateur est authentifié
-            $_SESSION['user_id'] = $user['UserID'];
-            $_SESSION['username'] = $user['Username'];
+            if ($user && password_verify($password, $user['PasswordHash'])) {
+                $_SESSION['user_id'] = $user['UserID'];
+                $_SESSION['username'] = $user['Username'];
 
-            if ($user['FirstLogin']) {
-                header('Location: change_password.php'); // Redirige vers la page de changement de mot de passe
-            } else {
                 // Vérifie si l'utilisateur est un administrateur
                 $stmt = $pdo->prepare('SELECT r.RoleName FROM Roles r INNER JOIN UserRoles ur ON r.RoleID = ur.RoleID WHERE ur.UserID = :userid');
                 $stmt->execute(['userid' => $user['UserID']]);
@@ -38,13 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
 
                 if (in_array('Administrateur', $roles)) {
                     header('Location: app/admin/index.php');
-                } else {
-                    header('Location: app/admin/php/create_account.php'); // Ou tout autre page pour les utilisateurs non-admin
+                    exit();
                 }
+            } else {
+                $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
             }
-            exit();
-        } else {
-            $error = 'Nom d\'utilisateur ou mot de passe incorrect.';
         }
     }
 }
@@ -54,27 +50,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username'], $_POST['pa
 <html>
 <head>
     <title>Connexion - NexaLogix</title>
-    <link rel="stylesheet" type="text/css" href="path_to_bootstrap.css">
-    <!-- Inclure d'autres fichiers CSS si nécessaire -->
+    <link rel="stylesheet" href="path_to_bootstrap.css">
 </head>
 <body>
     <div class="container">
         <h2>Connexion</h2>
         <?php if ($error): ?>
-            <p class="error"><?php echo $error; ?></p>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error; ?>
+            </div>
         <?php endif; ?>
         <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur:</label>
-                <input type="text" name="username" id="username" required>
+                <input type="text" class="form-control" name="username" id="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe:</label>
-                <input type="password" name="password" id="password">
+                <input type="password" class="form-control" name="password" id="password">
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
-        <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a>
+        <!-- Lien pour créer un compte administrateur, affiché seulement si nécessaire -->
+        <!-- <a href="app/admin/php/create_account.php" class="btn btn-info">Créer un Compte Administrateur</a> -->
     </div>
 
     <script src="path_to_jquery.js"></script>
