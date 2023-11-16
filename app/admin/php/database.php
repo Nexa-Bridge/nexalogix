@@ -1,6 +1,6 @@
 <?php
 // Informations de connexion à la base de données
-$servername = "localhost";
+$servername = "localhost:3360";
 $username = "easybiom_logix";
 $password = "LogixPsW";
 $dbname = "easybiom_nexalogix";
