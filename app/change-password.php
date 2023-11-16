@@ -3,10 +3,10 @@ session_start();
 include 'app/php/database.php'; // Ajustez ce chemin selon votre structure de dossiers
 
 // Vérifie si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
+//if (!isset($_SESSION['user_id'])) {
+//    header('Location: login.php');
+//   exit();
+//}
 
 $error = '';
 $success = '';
