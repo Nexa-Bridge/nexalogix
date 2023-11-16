@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>NexaLOGIX</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../admin/css/style.css">
-    <script src="../admin/js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaLogix Administration</title>
+    <link rel="stylesheet" href="path/to/bootstrap.css">
+    <link rel="stylesheet" href="../admin/css/style.css">
 </head>
 <body>
+    <header>
+        <h1>Header : Logix </h1>
+    </header>

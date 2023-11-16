@@ -1,14 +1,24 @@
 <?php
-$servername = "localhost:3306";
-$username = "easybiom_logix";
-$password = "nozdu5-dupQeh-pokqex";
-$dbname = "easybiom_nexalogix";
+// Paramètres de connexion à la base de données
+$host = 'localhost';
+$db_name = 'easybiom_nexalogix'; // Remplacer par le nom de votre base de données
+$username = 'easybiom_logix'; // Remplacer par votre nom d'utilisateur de la base de données
+$password = 'LogixPsW'; // Remplacer par votre mot de passe de la base de données   
 
-// Créer une connexion
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+    // Création d'une instance PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
 
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // Définir le mode d'erreur PDO sur Exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Optionnel : Définir le mode de récupération par défaut
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    // Affichage d'un message de succès de connexion (à des fins de débogage, peut être supprimé en production)
+    echo "Connexion à la base de données réussie!";
+} catch (PDOException $e) {
+    // Gestion des erreurs de connexion
+    die("Erreur de connexion à la base de données: " . $e->getMessage());
 }
 ?>
