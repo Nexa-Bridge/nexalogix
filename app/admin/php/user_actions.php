@@ -32,17 +32,15 @@ switch ($action) {
         break;
 
         case 'read':
-            $sql = "SELECT UserID, Username, Email, Role FROM Users";
-            $users = [];
-            if ($result = $mysqli->query($sql)) {
-                while ($row = $result->fetch_assoc()) {
-                    $users[] = $row;
-                }
-                echo json_encode($users);
-            } else {
-                echo "Error: " . $mysqli->error;
-            }
-            break;
+            $sql = "SELECT UserID, Username, Email FROM Users";
+$result = $mysqli->query($sql); // or use PDO method if you're using PDO
+
+if ($result) {
+    $users = $result->fetch_all(MYSQLI_ASSOC);
+    echo "<pre>"; print_r($users); echo "</pre>";
+} else {
+    echo "Error: " . $mysqli->error;
+}
         
 
     case 'update':
