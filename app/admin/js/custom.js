@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers() {
     $.ajax({
-        url: '../php/user_actions.php',
+        url: 'php/user_actions.php',
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
