@@ -1,5 +1,3 @@
-$action = 'read';
-
 document.addEventListener('DOMContentLoaded', function() {
     // Load users when the page is ready
     loadUsers();
@@ -10,29 +8,30 @@ document.addEventListener('DOMContentLoaded', function() {
         loadButton.addEventListener('click', loadUsers);
     }
 });
-$action = 'read';
 
 function loadUsers(sortColumn, sortOrder) {
     $.ajax({
-        url: '/app/admin/php/user_actions.php',
+        url: '/app/admin/php/user_actions.php', // Assurez-vous que cette URL est correcte
         type: 'POST',
         data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },
         success: function(response) {
             console.log("Response:", response); // Check the response
-            populateUserTable(JSON.parse(response));
+            try {
+                let users = JSON.parse(response);
+                populateUserTable(users);
+            } catch (e) {
+                console.error("Erreur lors de l'analyse JSON: ", e);
+                // Gérer l'erreur de parsing ici (afficher un message à l'utilisateur, par exemple)
+            }
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error: Status -", status, "Error -", error);
             console.error("Response Text:", xhr.responseText);
-        
             // Pour plus de détails
             console.error("Full XHR Object:", xhr);
         }
     });
 }
-
-// Add other functions (populateUserTable, createUser, etc.) as needed
-
 
 
 function populateUserTable(users) {
@@ -89,27 +88,29 @@ function handleFormSubmit(event) {
     // Logic to handle form submission
 }
 
-function sortTable(columnName) {
-    let table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("userTableBody");
-    switching = true;
+function sortTable(columnIndex) {
+    let table = document.getElementById("userTableBody");
+    let switching = true;
+    let rows, i, x, y, shouldSwitch;
 
     while (switching) {
         switching = false;
         rows = table.rows;
+
         for (i = 0; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[columnName];
-            y = rows[i + 1].getElementsByTagName("TD")[columnName];
+            x = rows[i].getElementsByTagName("TD")[columnIndex];
+            y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
             if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                 shouldSwitch = true;
                 break;
             }
         }
+
         if (shouldSwitch) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
         }
     }
 }
-

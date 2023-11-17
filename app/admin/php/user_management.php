@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-$mysqli = new mysqli("localhost", "easybiom_logix", "LogixPsW", "easybiom_nexalogix");
-
-if ($mysqli->connect_error) {
-    die("Connexion échouée: " . $mysqli->connect_error);
-} else {
-    echo "Connexion à la base de données réussie";
-}
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -33,7 +26,6 @@ if (!isLoggedIn() || !isAdmin()) {
         Ajouter un utilisateur
     </button>
     <button id="loadUsersButton" class="btn btn-primary">Load Users</button>
-
 
     <!-- User Table -->
     <div class="table-responsive">
