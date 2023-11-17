@@ -6,9 +6,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../../includes/header.php';
-require_once 'auth.php';
-require_once 'database.php';
+require_once '../includes/header.php';
+require_once 'php/auth.php';
+require_once 'php/database.php';
 
 // Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
@@ -16,8 +16,6 @@ if (!isLoggedIn() || !isAdmin()) {
     exit;
 }
 ?>
-
-<script src="../js/custom.js"></script>
 
 <div class="container mt-5">
     <h1 class="mb-4">Gestion des Utilisateurs</h1>
