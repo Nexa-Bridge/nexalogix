@@ -30,7 +30,7 @@ function loadUsers() {
 
 function populateUserTable(users) {
     const tableBody = document.getElementById('userTableBody');
-    tableBody.innerHTML = ''; // Clear existing rows
+    //tableBody.innerHTML = ''; // Clear existing rows
 
     users.forEach(user => {
         const row = tableBody.insertRow();
