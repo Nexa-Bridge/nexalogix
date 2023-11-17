@@ -1,3 +1,5 @@
+$action = 'read';
+
 document.addEventListener('DOMContentLoaded', function() {
     // Load users when the page is ready
     loadUsers();
@@ -8,9 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
         loadButton.addEventListener('click', loadUsers);
     }
 });
+$action = 'read';
 
 function loadUsers(sortColumn, sortOrder) {
     $.ajax({
+        
         url: '../php/user_actions.php',
         type: 'POST',
         data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },

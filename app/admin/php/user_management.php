@@ -20,7 +20,7 @@ require_once 'database.php';
 
 // Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
-    header('Location: /login.php');
+    header('Location: ../login.php');
     exit;
 }
 ?>
