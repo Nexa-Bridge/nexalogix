@@ -1,4 +1,6 @@
 <?php
+$action = 'read';
+
 require_once 'database.php';
 
 // Function to sanitize input for basic security
