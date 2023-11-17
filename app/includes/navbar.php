@@ -23,8 +23,7 @@
                     </li>
                     <!-- Add more menu items here -->
                 </ul>
-                <a href="path_to_logout.php" class="btn my-custom-logout">Déconnexion</a>
-
+                <a href="../logout.php" class="btn btn-danger my-custom-logout">Déconnexion</a>
             </div>
         </div>
     </nav>
