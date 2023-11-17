@@ -1,6 +1,12 @@
 <?php
 session_start();
+$mysqli = new mysqli("host", "username", "password", "database");
 
+if ($mysqli->connect_error) {
+    die("Connexion échouée: " . $mysqli->connect_error);
+} else {
+    echo "Connexion à la base de données réussie";
+}
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
