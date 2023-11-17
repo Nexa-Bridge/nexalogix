@@ -17,7 +17,7 @@ if (!isLoggedIn() || !isAdmin()) {
 }
 ?>
 
-<script src="../js/custom.js"></script>
+<script src="js/custom.js"></script>
 
 <div class="container mt-5">
     <h1 class="mb-4">Gestion des Utilisateurs</h1>
