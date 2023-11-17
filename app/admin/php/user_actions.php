@@ -33,14 +33,17 @@ switch ($action) {
         case 'read':
             echo "Reading users..."; // Test output
             $sql = "SELECT UserID, Username, Email, Role FROM Users";
+            echo "ici sql";
             $users = [];
             if ($result = $mysqli->query($sql)) {
                 while ($row = $result->fetch_assoc()) {
                     $users[] = $row;
                 }
+                echo "ici while";
                 echo json_encode($users);
             } else {
                 echo "Error: " . $mysqli->error;
+                echo "ici erreur";
             }
             break;
         
