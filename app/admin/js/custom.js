@@ -14,7 +14,7 @@ $action = 'read';
 
 function loadUsers(sortColumn, sortOrder) {
     $.ajax({
-        url: 'http://nexalogix.nexabridge.net/app/admin/admin/php/user_actions.php',
+        url: '/app/admin/php/user_actions.php',
         type: 'POST',
         data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },
         success: function(response) {
