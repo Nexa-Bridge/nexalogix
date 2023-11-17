@@ -84,5 +84,6 @@ switch ($action) {
 
 $action = 'read';
 
+
 $mysqli->close();
 ?>
