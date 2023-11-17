@@ -40,11 +40,10 @@ if (!isLoggedIn() || !isAdmin()) {
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Nom d'utilisateur</th>
-                <th>Email</th>
-                <th>Role</th> <!-- New column for role -->
-                <th>Actions</th>
+                <th onclick="sortTable('UserID')">ID</th>
+                <th onclick="sortTable('Username')">Nom d'utilisateur</th>
+                <th onclick="sortTable('Email')">Email</th>
+                <th onclick="sortTable('Role')">Role</th>
             </tr>
             </thead>
             <tbody id="userTableBody">

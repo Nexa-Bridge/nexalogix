@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function loadUsers() {
+function loadUsers(sortColumn, sortOrder) {
     $.ajax({
-        url: 'user_actions.php', // Relative path from admin/js/ to admin/php/
+        url: 'php/user_actions.php',
         type: 'POST',
-        data: { action: 'read' },
+        data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },
         success: function(response) {
             console.log("Response:", response); // Check the response
             populateUserTable(JSON.parse(response));
@@ -82,4 +82,27 @@ function handleFormSubmit(event) {
     // Logic to handle form submission
 }
 
+function sortTable(columnName) {
+    let table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("userTableBody");
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[columnName];
+            y = rows[i + 1].getElementsByTagName("TD")[columnName];
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
 
