@@ -30,16 +30,15 @@ switch ($action) {
         }
         break;
 
-    case 'read':
-        $sql = "SELECT id, username, email FROM Users";
-        if ($result = $mysqli->query($sql)) {
-            $users = $result->fetch_all(MYSQLI_ASSOC);
-            echo json_encode($users);
-            $result->free();
-        } else {
-            echo "Error: " . $mysqli->error;
-        }
-        break;
+        case 'read':
+            $sql = "SELECT Users.UserID, Users.Username, Users.Email, GROUP_CONCAT(Roles.RoleName SEPARATOR ', ') AS Roles 
+                    FROM Users 
+                    LEFT JOIN UserRoles ON Users.UserID = UserRoles.UserID 
+                    LEFT JOIN Roles ON UserRoles.RoleID = Roles.RoleID 
+                    GROUP BY Users.UserID";
+        
+            // Rest of the code remains the same
+            break;
 
     case 'update':
         // Assuming you're receiving user ID, email, and password

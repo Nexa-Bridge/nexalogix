@@ -25,19 +25,19 @@ function loadUsers() {
 
 function populateUserTable(users) {
     let tableBody = document.getElementById('userTableBody');
-    tableBody.innerHTML = ''; // Clear existing rows
+    tableBody.innerHTML = '';
 
     users.forEach(function(user) {
         let row = tableBody.insertRow();
-        row.insertCell(0).innerText = user.id;
-        row.insertCell(1).innerText = user.username;
-        row.insertCell(2).innerText = user.email;
-
-        let actionsCell = row.insertCell(3);
-        // Add edit and delete buttons with event listeners here
-        // Example: actionsCell.appendChild(createDeleteButton(user.id));
+        row.insertCell(0).innerText = user.UserID;
+        row.insertCell(1).innerText = user.Username;
+        row.insertCell(2).innerText = user.Email;
+        row.insertCell(3).innerText = user.Roles; // Add this line to display roles
+        let actionsCell = row.insertCell(4);
+        // Add buttons for actions
     });
 }
+
 
 function createUser(event) {
     event.preventDefault();

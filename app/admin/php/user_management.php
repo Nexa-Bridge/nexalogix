@@ -66,6 +66,10 @@ if (!isLoggedIn() || !isAdmin()) {
                             <label for="password">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
+                        <div class="form-group">
+                            <label for="actions">Actions</label>
+                            <input type="text" class="form-control" id="actions" name="actions" required>
+                        </div>
                         <input type="hidden" id="userId" name="userId">
                     </form>
                 </div>
