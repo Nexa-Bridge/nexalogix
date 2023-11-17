@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $mysqli = new mysqli("localhost", "easybiom_logix", "LogixPsW", "easybiom_nexalogix");
 
 if ($mysqli->connect_error) {
