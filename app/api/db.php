@@ -13,8 +13,10 @@ $options = [
 ];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$username, $password, $email]);
+    echo "Utilisateur créé avec succès.";
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
 }
 ?>
