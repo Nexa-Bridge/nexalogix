@@ -11,24 +11,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers(sortColumn, sortOrder) {
     $.ajax({
-        url: '/app/admin/php/user_actions.php', // Assurez-vous que cette URL est correcte
+        url: '/app/admin/php/user_actions.php',
         type: 'POST',
         data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },
         success: function(response) {
-            console.log("Response:", response); // Check the response
             try {
-                let users = JSON.parse(response);
-                populateUserTable(users);
+                console.log("Response:", response); // Check the response
+                populateUserTable(JSON.parse(response));
             } catch (e) {
                 console.error("Erreur lors de l'analyse JSON: ", e);
-                // Gérer l'erreur de parsing ici (afficher un message à l'utilisateur, par exemple)
+                // Ici, vous pouvez ajouter un traitement d'erreur ou un message pour l'utilisateur
             }
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error: Status -", status, "Error -", error);
             console.error("Response Text:", xhr.responseText);
-            // Pour plus de détails
             console.error("Full XHR Object:", xhr);
+
+            if (xhr.status === 404) {
+                console.error("Erreur 404 : Fichier non trouvé");
+                // Traitement spécifique pour l'erreur 404
+            } else if (xhr.status === 500) {
+                console.error("Erreur 500 : Erreur interne du serveur");
+                // Traitement spécifique pour l'erreur 500
+            }
+            // Vous pouvez ajouter d'autres cas de statut ici si nécessaire
         }
     });
 }
