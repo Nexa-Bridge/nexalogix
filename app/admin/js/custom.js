@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers(sortColumn, sortOrder) {
     $.ajax({
-        url: 'php/user_actions.php',
+        url: 'user_actions.php',
         type: 'POST',
         data: { action: 'read', sortColumn: sortColumn, sortOrder: sortOrder },
         success: function(response) {
