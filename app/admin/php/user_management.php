@@ -1,8 +1,4 @@
-<!-- In the <head> section -->
-<link href="../css/custom.css" rel="stylesheet">
 
-<!-- Right before the closing </body> tag -->
-<script src="../js/custom.js"></script>
 
 <?php
 // Start the session and include necessary files
@@ -12,7 +8,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../../includes/header.php';
+//require_once '../../includes/header.php';
 
 
 require_once 'auth.php';
@@ -24,6 +20,39 @@ if (!isLoggedIn() || !isAdmin()) {
     exit;
 }
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Espace Administration - NexaLogix</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+<body>
+<?php
+
+
+// Detect if the current script is login.php
+$isLoginPage = basename($_SERVER['PHP_SELF']) == 'login.php';
+
+// Include navbar.php if it's not the login page
+if (!$isLoginPage) {
+    include 'navbar.php'; // Adjust the path if necessary
+}
+
+// Rest of your header content (like loading CSS, etc.)
+?>
+
+    <header>
+        
+    </header>
+
 
 <div class="container mt-5">
     <h1 class="mb-4">Gestion des Utilisateurs</h1>
