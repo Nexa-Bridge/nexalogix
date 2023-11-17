@@ -1,11 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Attach event listener to the Load button
-    loadUsers();
-});
 
-document.getElementById('loadUsersButton').addEventListener('click', function() {
-    loadUsers();
-});
 
 function loadUsers() {
     $.ajax({
