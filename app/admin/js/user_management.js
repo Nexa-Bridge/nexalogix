@@ -7,7 +7,7 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '/app/api/users/create.php', // Votre script PHP pour ajouter un utilisateur
+            url: '/app/api/users/add_user.php', // Votre script PHP pour ajouter un utilisateur
             data: $(this).serialize(),
             success: function(response) {
                 alert(response);
@@ -20,7 +20,7 @@ $(document).ready(function() {
     function loadUsers() {
         $.ajax({
             type: 'GET',
-            url: '/app/api/users/getId.php', // Votre script PHP pour obtenir les utilisateurs
+            url: '/app/api/users/get_users.php', // Votre script PHP pour obtenir les utilisateurs
             success: function(response) {
                 $('#usersList').html(response);
             }
