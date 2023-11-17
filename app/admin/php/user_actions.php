@@ -1,5 +1,5 @@
 <?php
-require_once 'php/database.php'; // Adjust this path as needed
+require_once 'database.php'; // Adjust this path as needed
 
 // Function to sanitize input for basic security
 function sanitizeInput($data) {
@@ -36,8 +36,7 @@ switch ($action) {
                     LEFT JOIN UserRoles ON Users.UserID = UserRoles.UserID 
                     LEFT JOIN Roles ON UserRoles.RoleID = Roles.RoleID 
                     GROUP BY Users.UserID";
-        
-            // Rest of the code remains the same
+            // Execute query and output results
             break;
 
     case 'update':
