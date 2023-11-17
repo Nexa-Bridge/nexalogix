@@ -1,90 +1,39 @@
 <?php
-require_once '/app/admin/php/database.php';
+// Paramètres de connexion à la base de données
+$host = 'localhost';
+$dbname = 'easybiom_nexalogix'; 
+$username = 'easybiom_logix';
+$password = 'LogixPsW';   
 
-// Function to sanitize input for basic security
-function sanitizeInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+// Créer une connexion
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Erreur de connexion: " . $conn->connect_error);
 }
 
-$action = isset($_POST['action']) ? sanitizeInput($_POST['action']) : '';
+// Gestion des actions
+$action = isset($_POST['action']) ? $_POST['action'] : '';
 
 switch ($action) {
-    case 'create':
-        // Assuming you're receiving username, email, and password
-        $username = sanitizeInput($_POST['username']);
-        $email = sanitizeInput($_POST['email']);
-        $password = sanitizeInput($_POST['password']); 
+    case 'read':
+        // Exemple de requête pour lire les données utilisateur
+        $sql = "SELECT * FROM VotreTableUtilisateur"; // Remplacez par votre requête SQL
+        $result = $conn->query($sql);
 
-        $sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
-        if ($stmt = $mysqli->prepare($sql)) {
-            $stmt->bind_param("sss", $username, $email, $password);
-            if ($stmt->execute()) {
-                echo "User created successfully";
-            } else {
-                echo "Error: " . $mysqli->error;
-            }
-            $stmt->close();
+        if ($result) {
+            $users = $result->fetch_all(MYSQLI_ASSOC);
+            echo json_encode($users);
+        } else {
+            echo "Erreur: " . $conn->error;
         }
         break;
 
-        case 'read':
-            echo "Reading users..."; // Test output
-            $sql = "SELECT UserID, Username, Email, Role FROM Users";
-            echo "ici sql";
-            $users = [];
-            if ($result = $mysqli->query($sql)) {
-                while ($row = $result->fetch_assoc()) {
-                    $users[] = $row;
-                }
-                echo "ici while";
-                echo json_encode($users);
-            } else {
-                echo "Error: " . $mysqli->error;
-                echo "ici erreur";
-            }
-            break;
-        
-
-    case 'update':
-        // Assuming you're receiving user ID, email, and password
-        $id = sanitizeInput($_POST['id']);
-        $email = sanitizeInput($_POST['email']);
-        $password = sanitizeInput($_POST['password']); 
-
-        $sql = "UPDATE Users SET email = ?, password = ? WHERE id = ?";
-        if ($stmt = $mysqli->prepare($sql)) {
-            $stmt->bind_param("ssi", $email, $password, $id);
-            if ($stmt->execute()) {
-                echo "User updated successfully";
-            } else {
-                echo "Error: " . $mysqli->error;
-            }
-            $stmt->close();
-        }
-        break;
-
-    case 'delete':
-        $id = sanitizeInput($_POST['id']);
-
-        $sql = "DELETE FROM Users WHERE id = ?";
-        if ($stmt = $mysqli->prepare($sql)) {
-            $stmt->bind_param("i", $id);
-            if ($stmt->execute()) {
-                echo "User deleted successfully";
-            } else {
-                echo "Error: " . $mysqli->error;
-            }
-            $stmt->close();
-        }
-        break;
-
-    default:
-        echo "Invalid Action";
-        break;
+    // Vous pouvez ajouter ici des cas pour 'create', 'update', 'delete', etc.
+    // Assurez-vous de sécuriser ces actions et de valider les données reçues.
 }
 
-$mysqli->close();
+// Fermer la connexion
+$conn->close();
 ?>

@@ -25,7 +25,7 @@ if (!isLoggedIn() || !isAdmin()) {
     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#userModal">
         Ajouter un utilisateur
     </button>
-    <button id="loadUsersButton" class="btn btn-primary" data-toggle="modal" data-target="#userModal">Load Users</button>
+    <button id="loadUsersButton" class="btn btn-primary">Load Users</button>
 
     <!-- User Table -->
     <div class="table-responsive">
