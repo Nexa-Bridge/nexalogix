@@ -19,7 +19,7 @@ $action = isset($_POST['action']) ? $_POST['action'] : '';
 switch ($action) {
     case 'read':
         // Exemple de requête pour lire les données utilisateur
-        $sql = "SELECT * FROM VotreTableUtilisateur"; // Remplacez par votre requête SQL
+        $sql = "SELECT * FROM Users"; // Remplacez par votre requête SQL
         $result = $conn->query($sql);
 
         if ($result) {
