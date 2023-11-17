@@ -1,3 +1,9 @@
+<!-- In the <head> section -->
+<link href="../css/custom.css" rel="stylesheet">
+
+<!-- Right before the closing </body> tag -->
+<script src="../js/custom.js"></script>
+
 <?php
 // Start the session and include necessary files
 session_start();
