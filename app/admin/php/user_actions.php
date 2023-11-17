@@ -1,6 +1,5 @@
 <?php
-$_POST['action'] = 'read';
-require_once 'database.php'; // Adjust this path as needed
+require_once 'database.php';
 
 // Function to sanitize input for basic security
 function sanitizeInput($data) {
@@ -17,7 +16,7 @@ switch ($action) {
         // Assuming you're receiving username, email, and password
         $username = sanitizeInput($_POST['username']);
         $email = sanitizeInput($_POST['email']);
-        $password = sanitizeInput($_POST['password']); // Consider hashing the password
+        $password = sanitizeInput($_POST['password']); 
 
         $sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
         if ($stmt = $mysqli->prepare($sql)) {
@@ -32,22 +31,24 @@ switch ($action) {
         break;
 
         case 'read':
-            $sql = "SELECT UserID, Username, Email FROM Users";
-$result = $mysqli->query($sql); // or use PDO method if you're using PDO
-
-if ($result) {
-    $users = $result->fetch_all(MYSQLI_ASSOC);
-    echo "<pre>"; print_r($users); echo "</pre>";
-} else {
-    echo "Error: " . $mysqli->error;
-}
+            $sql = "SELECT UserID, Username, Email, Role FROM Users";
+            $users = [];
+            if ($result = $mysqli->query($sql)) {
+                while ($row = $result->fetch_assoc()) {
+                    $users[] = $row;
+                }
+                echo json_encode($users);
+            } else {
+                echo "Error: " . $mysqli->error;
+            }
+            break;
         
 
     case 'update':
         // Assuming you're receiving user ID, email, and password
         $id = sanitizeInput($_POST['id']);
         $email = sanitizeInput($_POST['email']);
-        $password = sanitizeInput($_POST['password']); // Consider hashing the password
+        $password = sanitizeInput($_POST['password']); 
 
         $sql = "UPDATE Users SET email = ?, password = ? WHERE id = ?";
         if ($stmt = $mysqli->prepare($sql)) {
