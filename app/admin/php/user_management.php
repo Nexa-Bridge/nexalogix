@@ -1,26 +1,19 @@
-<!-- In the <head> section -->
-<link href="../css/custom.css" rel="stylesheet">
-
-<!-- Right before the closing </body> tag -->
-<script src="../js/custom.js"></script>
-
 <?php
-// Start the session and include necessary files
 session_start();
+
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Include necessary files
 require_once '../../includes/header.php';
-
-
 require_once 'auth.php';
 require_once 'database.php';
 
 // Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
-    header('Location: ../login.php');
+    header('Location: ../../login.php');
     exit;
 }
 ?>

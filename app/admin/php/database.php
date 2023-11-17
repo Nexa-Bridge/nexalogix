@@ -1,9 +1,9 @@
 <?php
 // Paramètres de connexion à la base de données
 $host = 'localhost';
-$db_name = 'easybiom_nexalogix'; // Remplacer par le nom de votre base de données
-$username = 'easybiom_logix'; // Remplacer par votre nom d'utilisateur de la base de données
-$password = 'LogixPsW'; // Remplacer par votre mot de passe de la base de données   
+$db_name = 'easybiom_nexalogix'; 
+$username = 'easybiom_logix';
+$password = 'LogixPsW';   
 
 try {
     // Création d'une instance PDO
