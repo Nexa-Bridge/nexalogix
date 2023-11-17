@@ -45,23 +45,7 @@ if (!isLoggedIn() || !isAdmin()) {
     </div>
 
 
-    <h1>Gestion des Utilisateurs</h1>
-
-    <!-- Formulaire pour ajouter un utilisateur -->
-    <h2>Ajouter un Utilisateur</h2>
-    <form id="addUserForm">
-        Nom d'utilisateur: <input type="text" name="username" required><br>
-        Mot de passe: <input type="password" name="password" required><br>
-        Email: <input type="email" name="email"><br>
-        <button type="submit">Ajouter</button>
-    </form>
-
-    <!-- Liste des utilisateurs -->
-    <h2>Liste des Utilisateurs</h2>
-    <div id="usersList">
-        <!-- Les utilisateurs seront chargés ici -->
-    </div>
-
+   
 
 
 
@@ -79,8 +63,22 @@ if (!isLoggedIn() || !isAdmin()) {
     <!-- Liste des utilisateurs -->
     <h2>Liste des Utilisateurs</h2>
     <div id="usersList">
-        <!-- Les utilisateurs seront chargés ici -->
-    </div>
+    <!-- Les utilisateurs seront chargés ici par AJAX -->
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les lignes de données seront ajoutées ici dynamiquement -->
+        </tbody>
+    </table>
+</div>
+
 
 
 
