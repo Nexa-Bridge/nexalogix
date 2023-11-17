@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-echo "<pre>Session: "; print_r($_SESSION); echo "</pre>";
-echo "isLoggedIn: " . (isLoggedIn() ? "true" : "false") . "<br>";
-echo "isAdmin: " . (isAdmin() ? "true" : "false") . "<br>";
 
 // Start the session
 
