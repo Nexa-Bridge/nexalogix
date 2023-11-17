@@ -24,3 +24,20 @@ body {
     padding: 10px 0;
     text-align: center;
 }
+
+.my-custom-logout {
+    background-color: #dc3545; /* Bootstrap 'danger' color */
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    /* Adding a hover effect */
+    &:hover, &:focus {
+        background-color: #c82333; /* Slightly darker shade for hover */
+        color: white;
+        text-decoration: none;
+    }
+}
