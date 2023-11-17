@@ -44,6 +44,54 @@ if (!isLoggedIn() || !isAdmin()) {
         </table>
     </div>
 
+
+    <h1>Gestion des Utilisateurs</h1>
+
+    <!-- Formulaire pour ajouter un utilisateur -->
+    <h2>Ajouter un Utilisateur</h2>
+    <form id="addUserForm">
+        Nom d'utilisateur: <input type="text" name="username" required><br>
+        Mot de passe: <input type="password" name="password" required><br>
+        Email: <input type="email" name="email"><br>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <!-- Liste des utilisateurs -->
+    <h2>Liste des Utilisateurs</h2>
+    <div id="usersList">
+        <!-- Les utilisateurs seront chargés ici -->
+    </div>
+
+
+
+
+    <h1>Gestion des Utilisateurs</h1>
+
+    <!-- Formulaire pour ajouter un utilisateur -->
+    <h2>Ajouter un Utilisateur</h2>
+    <form id="addUserForm">
+        Nom d'utilisateur: <input type="text" name="username" required><br>
+        Mot de passe: <input type="password" name="password" required><br>
+        Email: <input type="email" name="email"><br>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <!-- Liste des utilisateurs -->
+    <h2>Liste des Utilisateurs</h2>
+    <div id="usersList">
+        <!-- Les utilisateurs seront chargés ici -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
     <!-- User Modal (for adding/editing) -->
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
