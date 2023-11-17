@@ -1,5 +1,5 @@
 <?php
-require_once 'database.php';
+require_once '/app/admin/php/database.php';
 
 // Function to sanitize input for basic security
 function sanitizeInput($data) {
