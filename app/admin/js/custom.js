@@ -33,11 +33,12 @@ function populateUserTable(users) {
         row.insertCell(0).innerText = user.UserID;
         row.insertCell(1).innerText = user.Username;
         row.insertCell(2).innerText = user.Email;
-        row.insertCell(3).innerText = user.Roles; // Add this line to display roles
+        row.insertCell(3).innerText = user.Role; // Add this line to display the role
         let actionsCell = row.insertCell(4);
         // Add buttons for actions
     });
 }
+
 
 
 function createUser(event) {

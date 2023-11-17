@@ -28,12 +28,13 @@ if (!isLoggedIn() || !isAdmin()) {
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom d'utilisateur</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Rôle</th> <!-- New column for role -->
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody id="userTableBody">
                 <!-- Users will be loaded here via AJAX -->
@@ -65,10 +66,6 @@ if (!isLoggedIn() || !isAdmin()) {
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="actions">Actions</label>
-                            <input type="text" class="form-control" id="actions" name="actions" required>
                         </div>
                         <input type="hidden" id="userId" name="userId">
                     </form>
