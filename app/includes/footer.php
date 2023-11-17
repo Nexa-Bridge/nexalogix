@@ -15,12 +15,12 @@
 
     <script>
         if (window.jQuery) {
-    // jQuery is loaded
-    console.log("jQuery is loaded");
-} else {
-    // jQuery is not loaded
-    console.log("jQuery is not loaded");
-}
-    </script>
+            // jQuery is loaded
+            console.log("jQuery is loaded");
+        } else {
+            // jQuery is not loaded
+            console.log("jQuery is not loaded");
+        }
+            </script>
 </body>
 </html>

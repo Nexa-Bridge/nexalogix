@@ -22,7 +22,11 @@ function loadUsers(sortColumn, sortOrder) {
             populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
-            console.error("AJAX Error:", xhr.responseText);
+            console.error("AJAX Error: Status -", status, "Error -", error);
+            console.error("Response Text:", xhr.responseText);
+        
+            // Pour plus de détails
+            console.error("Full XHR Object:", xhr);
         }
     });
 }
