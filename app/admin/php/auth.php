@@ -7,8 +7,8 @@ function isLoggedIn() {
 }
 
 function isAdmin() {
-    // This is an example; adjust according to how you store admin status
-    return isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
+    // Assuming the username 'admin' is reserved for the admin user
+    return isset($_SESSION['Username']) && $_SESSION['Username'] == 'admin';
 }
 
 function login($username, $password) {

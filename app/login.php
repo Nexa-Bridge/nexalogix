@@ -49,12 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Check user's role and redirect accordingly
                         $userRole = $row["RoleName"];
-                        if ($userRole == 'Admin') {
-                            header("location: admin/index.php"); // Admin dashboard
+                        // ... [After setting session variables in the login script]
+
+                        // Redirect user based on role
+                        if (isAdmin()) {
+                            header("location: admin/index.php"); // Redirect to admin dashboard
                         } else {
-                            header("location: user_dashboard.php"); // User dashboard
+                            header("location: user_dashboard.php"); // Redirect to user dashboard
                         }
                         exit;
+
                     } else {
                         $password_err = "The password you entered was not valid.";
                     }
