@@ -27,6 +27,8 @@ if (!isLoggedIn() || !isAdmin()) {
         Ajouter un utilisateur
     </button>
 
+    <button id="loadUsersButton" class="btn btn-info">Load Users</button>
+
     <!-- User Table -->
     <div class="table-responsive">
         <table class="table table-striped">

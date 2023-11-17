@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load users when the page is ready
-    loadUsers();
-
-    // Add event listener for user form submission (if applicable)
-    // Example: document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
+    // Attach event listener to the Load button
+    document.getElementById('loadUsersButton').addEventListener('click', function() {
+        loadUsers();
+    });
 });
 
 function loadUsers() {
@@ -12,7 +11,7 @@ function loadUsers() {
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
-            console.log("AJAX Response:", response); // Check the AJAX response
+            console.log("AJAX Response:", response); // Helps in debugging
             populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
@@ -20,7 +19,6 @@ function loadUsers() {
         }
     });
 }
-
 
 function populateUserTable(users) {
     const tableBody = document.getElementById('userTableBody');
