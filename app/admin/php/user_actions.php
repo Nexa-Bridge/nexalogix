@@ -1,11 +1,6 @@
 <?php
 require_once 'database.php';
 
-$_POST['action'] = 'create';
-$_POST['username'] = 'testuser';
-$_POST['email'] = 'test@example.com';
-$_POST['password'] = 'testpassword'; // Ideally, this should be hashed
-
 // Function to sanitize input for basic security
 function sanitizeInput($data) {
     $data = trim($data);
@@ -23,9 +18,7 @@ switch ($action) {
         $email = sanitizeInput($_POST['email']);
         $password = sanitizeInput($_POST['password']); 
 
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO Users (Username, Email, PasswordHash) VALUES (?, ?, ?)";
-
+        $sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
         if ($stmt = $mysqli->prepare($sql)) {
             $stmt->bind_param("sss", $username, $email, $password);
             if ($stmt->execute()) {

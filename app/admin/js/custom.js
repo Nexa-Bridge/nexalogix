@@ -2,24 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load users when the page is ready
     loadUsers();
 
-    // Add event listener for user form submission (if applicable)
-    // Example: document.getElementById('userForm').addEventListener('submit', handleFormSubmit);
+    // Optionally, add an event listener for a button click
+    var loadButton = document.getElementById('loadUsersButton');
+    if (loadButton) {
+        loadButton.addEventListener('click', loadUsers);
+    }
 });
 
 function loadUsers() {
     $.ajax({
-        url: '../php/user_actions.php', 
+        url: 'php/user_actions.php', // Adjust the path as needed
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
-            console.log("AJAX Response:", response); // Check the AJAX response
+            // Assuming populateUserTable is a function to handle the response
             populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
-            console.error("AJAX Error:", xhr.responseText);
+            console.error("Error:", xhr.responseText);
         }
     });
 }
+
+// Add other functions (populateUserTable, createUser, etc.) as needed
+
 
 
 function populateUserTable(users) {
