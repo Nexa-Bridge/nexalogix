@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers() {
     $.ajax({
-        url: 'path/to/user_actions.php', // Adjust the path to the location of your user_actions.php file
+        url: '../php/user_actions.php', // Adjust the path to the location of your user_actions.php file
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
