@@ -15,6 +15,7 @@ function loadUsers() {
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
+            console.log(response); // Check the response that you get from the server
             populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
