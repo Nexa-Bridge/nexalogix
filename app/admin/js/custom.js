@@ -8,18 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers() {
     $.ajax({
-        url: '../php/user_actions.php', // Adjust the path to the location of your user_actions.php file
+        url: '../php/user_actions.php',
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
-            const users = JSON.parse(response);
-            populateUserTable(users);
+            console.log("AJAX Response:", response); // Check the AJAX response
+            populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
-            console.error("Error loading users:", xhr.responseText);
+            console.error("AJAX Error:", xhr.responseText);
         }
     });
 }
+
 
 function populateUserTable(users) {
     const tableBody = document.getElementById('userTableBody');

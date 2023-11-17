@@ -1,4 +1,5 @@
 <?php
+$_POST['action'] = 'read';
 require_once 'database.php'; // Adjust this path as needed
 
 // Function to sanitize input for basic security
