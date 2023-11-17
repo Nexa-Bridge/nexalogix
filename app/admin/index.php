@@ -1,50 +1,46 @@
 <?php
-// Démarrage de la session
 session_start();
 
-// Activez l'affichage des erreurs pour le débogage
+// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Inclusion des fichiers nécessaires
+// Include necessary files
 require_once '../includes/header.php';
 require_once 'php/auth.php';
 require_once 'php/database.php';
 
-// Vérifier si l'utilisateur est connecté et a le rôle d'administrateur
+// Check if the user is logged in and is an administrator
 if (!isLoggedIn() || !isAdmin()) {
-    header('Location: /login.php');
+    header('Location: ../login.php');
     exit;
 }
-
-// Contenu de la page d'administration
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Espace Administration - NexaLogix</title>
-    <link rel="stylesheet" href="../path_to_bootstrap.css"> <!-- Ajustez le chemin si nécessaire -->
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Bienvenue dans l'espace d'administration NexaLogix</h1>
-        <p>Cette section est réservée aux administrateurs.</p>
-        
-        <!-- Ici, vous pouvez ajouter d'autres éléments de l'interface d'administration -->
-        <!-- Par exemple, des liens vers d'autres pages d'administration, des tableaux de statistiques, etc. -->
-
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bienvenue dans l'Espace d'Administration de NexaLogix</h1>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des Utilisateurs</h5>
+                    <p class="card-text">Gérez les comptes utilisateurs, assignez des rôles, et plus.</p>
+                    <a href="php/user_management.php" class="btn btn-primary">Gérer</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Vérification des Journaux</h5>
+                    <p class="card-text">Consultez les journaux d'activités pour la maintenance et la sécurité.</p>
+                    <a href="logs.php" class="btn btn-primary">Consulter</a>
+                </div>
+            </div>
+        </div>
+        <!-- Add more cards/sections here -->
     </div>
+</div>
 
-    <!-- Script JS (Bootstrap, jQuery) -->
-    <script src="../path_to_jquery.js"></script> <!-- Ajustez le chemin si nécessaire -->
-    <script src="../path_to_bootstrap.js"></script> <!-- Ajustez le chemin si nécessaire -->
-
-    <?php
-    // Inclusion du pied de page
-    require_once '../includes/footer.php'; // Ajustez le chemin si nécessaire
-    ?>
-</body>
-</html>
+<?php require_once '../includes/footer.php'; // Adjust the path as needed ?>

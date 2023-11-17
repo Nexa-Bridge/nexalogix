@@ -3,11 +3,12 @@
 include 'database.php'; // Assurez-vous que le chemin d'accès au fichier database.php est correct
 
 function isLoggedIn() {
-    return isset($_SESSION['user_id']);
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 }
 
 function isAdmin() {
-    return isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
+    // Assuming the username 'admin' is reserved for the admin user
+    return isset($_SESSION['Username']) && $_SESSION['Username'] == 'admin';
 }
 
 function login($username, $password) {
