@@ -43,7 +43,7 @@ $isLoginPage = basename($_SERVER['PHP_SELF']) == 'login.php';
 
 // Include navbar.php if it's not the login page
 if (!$isLoginPage) {
-    include 'navbar.php'; // Adjust the path if necessary
+    include '../../includes/navbar.php'; // Adjust the path if necessary
 }
 
 // Rest of your header content (like loading CSS, etc.)
