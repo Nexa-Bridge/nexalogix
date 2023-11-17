@@ -9,6 +9,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/app/admin/css/custom.css">
     <script src="/app/admin/js/user_management.js"></script> 
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     
 </head>
 <body>
