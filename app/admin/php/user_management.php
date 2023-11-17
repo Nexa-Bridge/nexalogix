@@ -32,7 +32,7 @@ if (!isLoggedIn() || !isAdmin()) {
                 <th>ID</th>
                 <th>Nom d'utilisateur</th>
                 <th>Email</th>
-                <th>Rôle</th> <!-- New column for role -->
+                <th>Role</th> <!-- New column for role -->
                 <th>Actions</th>
             </tr>
             </thead>
