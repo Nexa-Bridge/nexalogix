@@ -40,6 +40,7 @@ function populateUserTable(users) {
         row.insertCell(3).innerText = user.Role; // Assuming you have a Role column
 
         const actionsCell = row.insertCell(4);
+        // Here, you can also add buttons or links for edit/delete actions
         actionsCell.appendChild(createEditButton(user.UserID));
         actionsCell.appendChild(createDeleteButton(user.UserID));
     });
