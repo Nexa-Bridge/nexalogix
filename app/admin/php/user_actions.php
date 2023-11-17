@@ -38,6 +38,7 @@ switch ($action) {
                     $users[] = $row;
                 }
                 echo json_encode($users);
+                echo "<pre>"; print_r($users); echo "</pre>";
             } else {
                 echo "Error: " . $mysqli->error;
             }
