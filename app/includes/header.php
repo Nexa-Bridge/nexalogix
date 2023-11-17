@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="app/admin/css/custom.css">
+    <link rel="stylesheet" href="/admin/css/custom.css">
 </head>
 <body>
 <?php
