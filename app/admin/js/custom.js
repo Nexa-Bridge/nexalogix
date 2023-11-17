@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers() {
     $.ajax({
-        url: '../php/user_actions.php', // Relative path from admin/js/ to admin/php/
+        url: 'user_actions.php', // Relative path from admin/js/ to admin/php/
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
@@ -23,6 +23,10 @@ function loadUsers() {
         }
     });
 }
+
+// Add other functions (populateUserTable, createUser, etc.) as needed
+
+
 
 function populateUserTable(users) {
     const tableBody = document.getElementById('userTableBody');
