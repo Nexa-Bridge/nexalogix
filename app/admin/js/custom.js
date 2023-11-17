@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function loadUsers() {
     $.ajax({
-        url: 'user_actions.php', // Relative path from admin/js/ to admin/php/
+        url: '../php/user_actions.php', // Relative path from admin/js/ to admin/php/
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
