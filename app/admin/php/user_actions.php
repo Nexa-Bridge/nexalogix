@@ -1,7 +1,7 @@
 <?php
-$action = 'read';
-
 require_once 'database.php';
+
+$action = 'read';
 
 // Function to sanitize input for basic security
 function sanitizeInput($data) {
@@ -33,6 +33,7 @@ switch ($action) {
         break;
 
         case 'read':
+            echo "Reading users..."; // Test output
             $sql = "SELECT UserID, Username, Email, Role FROM Users";
             $users = [];
             if ($result = $mysqli->query($sql)) {
@@ -40,7 +41,6 @@ switch ($action) {
                     $users[] = $row;
                 }
                 echo json_encode($users);
-                echo "<pre>"; print_r($users); echo "</pre>";
             } else {
                 echo "Error: " . $mysqli->error;
             }
