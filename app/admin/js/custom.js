@@ -15,11 +15,11 @@ function loadUsers() {
         type: 'POST',
         data: { action: 'read' },
         success: function(response) {
-            // Assuming populateUserTable is a function to handle the response
+            console.log("Response:", response); // Check the response
             populateUserTable(JSON.parse(response));
         },
         error: function(xhr, status, error) {
-            console.error("Error:", xhr.responseText);
+            console.error("AJAX Error:", xhr.responseText);
         }
     });
 }
@@ -80,3 +80,5 @@ function handleFormSubmit(event) {
     event.preventDefault();
     // Logic to handle form submission
 }
+
+
