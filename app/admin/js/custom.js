@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Attach event listener to the Load button
-    document.getElementById('loadUsersButton').addEventListener('click', function() {
-        loadUsers();
-    });
+    loadUsers();
+});
+
+document.getElementById('loadUsersButton').addEventListener('click', function() {
+    loadUsers();
 });
 
 function loadUsers() {
