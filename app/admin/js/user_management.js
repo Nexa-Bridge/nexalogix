@@ -20,12 +20,25 @@ $(document).ready(function() {
     function loadUsers() {
         $.ajax({
             type: 'GET',
-            url: '/app/api/users/get_users.php', // Votre script PHP pour obtenir les utilisateurs
+            url: 'get_users.php', // Votre script PHP pour obtenir les utilisateurs
             success: function(response) {
-                $('#usersList').html(response);
+                let users = JSON.parse(response); // Assumer que la réponse est en JSON
+                let html = '';
+                users.forEach(user => {
+                    html += `<tr>
+                                <td>${user.UserID}</td>
+                                <td>${user.Username}</td>
+                                <td>${user.Email}</td>
+                                <td>
+                                    <!-- Ajouter des boutons ou des liens pour la mise à jour/suppression -->
+                                </td>
+                             </tr>`;
+                });
+                $('#usersTable tbody').html(html);
             }
         });
     }
+    
 
     // Ajouter ici des fonctions pour la mise à jour et la suppression...
     // Vous pouvez utiliser des approches similaires pour ces actions.
