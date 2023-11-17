@@ -1,3 +1,5 @@
+<script src="../js/custom.js"></script>
+
 <?php
 // Start the session and include necessary files
 session_start();
