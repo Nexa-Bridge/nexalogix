@@ -1,3 +1,7 @@
+<!-- In the <head> section -->
+<link href="../css/custom.css" rel="stylesheet">
+
+<!-- Right before the closing </body> tag -->
 <script src="../js/custom.js"></script>
 
 <?php
@@ -9,6 +13,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../../includes/header.php';
+
+
 require_once 'auth.php';
 require_once 'database.php';
 
@@ -83,4 +89,4 @@ if (!isLoggedIn() || !isAdmin()) {
         </div>
     </div>
 </div>
-<?php require_once '../../includes/footer.php'; // Correct the path as needed ?>
+<?php require_once '../../includes/footer.php'; ?>
