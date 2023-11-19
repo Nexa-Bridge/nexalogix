@@ -1,5 +1,5 @@
 <?php
-require '/app/api/db.php';
+require '../db.php';
 
 $username = $_POST['username'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash du mot de passe
