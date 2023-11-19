@@ -46,6 +46,6 @@ if (!isLoggedIn() || !isAdmin()) {
 </div>
 
 <!-- Inclusion du fichier JavaScript pour la gestion des utilisateurs -->
-<script src="../js/userManagement.js"></script> <!-- Changez le chemin vers l'emplacement correct de votre fichier JS -->
+<script src="../js/userManagement.js"></script>
 
 <?php require_once '../../includes/footer.php'; ?>

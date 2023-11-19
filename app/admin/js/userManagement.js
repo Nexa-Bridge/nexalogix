@@ -18,7 +18,8 @@ $(document).ready(function() {
                                 </td>
                              </tr>`;
                 });
-                $('#usersTable tbody').html(html);
+                $('#userTableBody').html(html);
+
             },
             error: function() {
                 alert("Erreur lors du chargement des utilisateurs.");
