@@ -1,10 +1,10 @@
 $(document).ready(function() {
-    // Fonction pour charger et afficher les utilisateurs
     function loadUsers() {
         $.ajax({
             type: 'GET',
             url: 'http://nexalogix.nexabridge.net/api/users/get_user.php',
-            success: function(users) { // 'users' est déjà un objet JavaScript si la réponse est du JSON
+            dataType: 'json', // Assurez-vous que la réponse est traitée comme du JSON
+            success: function(users) {
                 let html = '';
                 users.forEach(user => {
                     html += `<tr>
@@ -12,7 +12,7 @@ $(document).ready(function() {
                                 <td>${user.Username}</td>
                                 <td>${user.Email}</td>
                                 <td>
-                                    <!-- Ici, vous pouvez ajouter des boutons ou des liens pour la mise à jour/suppression -->
+                                    <!-- Ici, des boutons ou liens pour la mise à jour/suppression peuvent être ajoutés -->
                                 </td>
                              </tr>`;
                 });
@@ -24,11 +24,5 @@ $(document).ready(function() {
         });
     }
 
-    // Charger la liste des utilisateurs au démarrage de la page
     loadUsers();
-
-    // Ici, vous pouvez ajouter d'autres fonctions pour la création, la mise à jour et la suppression des utilisateurs
 });
-
-
-
