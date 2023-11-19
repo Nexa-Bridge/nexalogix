@@ -3,7 +3,7 @@ $(document).ready(function() {
     function loadUsers() {
         $.ajax({
             type: 'GET',
-            url: '/api/users/get_user.php', // Script PHP pour obtenir les utilisateurs
+            url: '/api/users/get_user.php', 
             success: function(response) {
                 // Supposition que la réponse est en JSON
                 let users = JSON.parse(response);

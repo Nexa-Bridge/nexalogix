@@ -20,10 +20,10 @@ if (!isLoggedIn() || !isAdmin()) {
 <div class="container mt-5">
     <h1 class="mb-4">Gestion des Utilisateurs</h1>
 
-    <!-- Button to trigger modal for adding a new user -->
+    <!-- Button to trigger modal for adding a new user 
     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#userModal">
         Ajouter un utilisateur
-    </button>
+    </button> -->
 
     <!-- User Table -->
     <div class="table-responsive">
