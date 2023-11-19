@@ -11,8 +11,8 @@
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Inclusion de user_management.js après jQuery -->
-    <script src="/app/admin/js/user_management.js"></script>
+    <!-- Inclusion de userManagement.js après jQuery -->
+    <script src="/app/admin/js/userManagement.js"></script>
 </head>
 <body>
 <?php
