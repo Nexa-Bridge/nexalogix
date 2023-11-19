@@ -79,17 +79,6 @@ if (!isLoggedIn() || !isAdmin()) {
     </table>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- User Modal (for adding/editing) -->
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

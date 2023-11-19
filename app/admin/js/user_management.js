@@ -1,28 +1,12 @@
 $(document).ready(function() {
-    // Charger la liste des utilisateurs au chargement de la page
-    loadUsers();
-
-    // Ajouter un utilisateur
-    $('#addUserForm').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: '/app/api/users/add_user.php', // Votre script PHP pour ajouter un utilisateur
-            data: $(this).serialize(),
-            success: function(response) {
-                alert(response);
-                loadUsers(); // Recharger la liste après ajout
-            }
-        });
-    });
-
     // Fonction pour charger et afficher les utilisateurs
     function loadUsers() {
         $.ajax({
             type: 'GET',
-            url: 'get_users.php', // Votre script PHP pour obtenir les utilisateurs
+            url: 'get_user.php', // Script PHP pour obtenir les utilisateurs
             success: function(response) {
-                let users = JSON.parse(response); // Assumer que la réponse est en JSON
+                // Supposition que la réponse est en JSON
+                let users = JSON.parse(response);
                 let html = '';
                 users.forEach(user => {
                     html += `<tr>
@@ -30,16 +14,20 @@ $(document).ready(function() {
                                 <td>${user.Username}</td>
                                 <td>${user.Email}</td>
                                 <td>
-                                    <!-- Ajouter des boutons ou des liens pour la mise à jour/suppression -->
+                                    <!-- Ici, vous pouvez ajouter des boutons ou des liens pour la mise à jour/suppression -->
                                 </td>
                              </tr>`;
                 });
                 $('#usersTable tbody').html(html);
+            },
+            error: function() {
+                alert("Erreur lors du chargement des utilisateurs.");
             }
         });
     }
-    
 
-    // Ajouter ici des fonctions pour la mise à jour et la suppression...
-    // Vous pouvez utiliser des approches similaires pour ces actions.
+    // Charger la liste des utilisateurs au démarrage de la page
+    loadUsers();
+
+    // Ici, vous pouvez ajouter d'autres fonctions pour la création, la mise à jour et la suppression des utilisateurs
 });
