@@ -1,3 +1,5 @@
+/* custom.css */
+
 /* Custom body style */
 body {
     background-color: #f8f9fa;
@@ -23,7 +25,6 @@ body {
     text-align: center;
 }
 
-/* Custom style for my-custom-logout */
 .my-custom-logout {
     background-color: #dc3545; /* Bootstrap 'danger' color */
     color: white;
@@ -32,12 +33,11 @@ body {
     font-weight: bold;
     border: none;
     transition: background-color 0.3s ease;
-}
 
-/* Hover effect for my-custom-logout */
-.my-custom-logout:hover,
-.my-custom-logout:focus {
-    background-color: #c82333; /* Slightly darker shade for hover */
-    color: white;
-    text-decoration: none;
+    /* Adding a hover effect */
+    &:hover, &:focus {
+        background-color: #c82333; /* Slightly darker shade for hover */
+        color: white;
+        text-decoration: none;
+    }
 }
