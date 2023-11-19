@@ -21,8 +21,8 @@ $(document).ready(function() {
                 $('#userTableBody').html(html);
 
             },
-            error: function() {
-                alert("Erreur lors du chargement des utilisateurs.");
+            error: function(xhr, status, error) {
+                console.error("Erreur AJAX : ", status, error, xhr.responseText);
             }
         });
     }

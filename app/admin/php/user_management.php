@@ -36,7 +36,7 @@ if (!isLoggedIn() || !isAdmin()) {
             <th>Role</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="userTableBody"></tbody>
                 <!-- Les utilisateurs seront chargés ici via AJAX -->
             </tbody>
         </table>
