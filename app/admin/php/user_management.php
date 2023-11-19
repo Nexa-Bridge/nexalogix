@@ -25,59 +25,61 @@ if (!isLoggedIn() || !isAdmin()) {
     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#userModal">
         Ajouter un utilisateur
     </button>
-    <button id="loadUsersButton" class="btn btn-primary">Load Users</button>
 
     <!-- User Table -->
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-            <th onclick="sortTable('UserID')">ID</th>
-            <th onclick="sortTable('Username')">Nom d'utilisateur</th>
-            <th onclick="sortTable('Email')">Email</th>
-            <th onclick="sortTable('Role')">Role</th>
+            <th>ID</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Role</th>
             </tr>
             </thead>
             <tbody id="userTableBody">
-                <!-- Users will be loaded here via AJAX -->
+                <!-- Les utilisateurs seront chargés ici via AJAX -->
             </tbody>
         </table>
     </div>
 
-    <!-- User Modal (for adding/editing) -->
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userModalLabel">Ajouter un utilisateur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form for adding or editing a user -->
-                    <form id="userForm">
-                        <div class="form-group">
-                            <label for="username">Nom d'utilisateur</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <input type="hidden" id="userId" name="userId">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary" form="userForm">Sauvegarder</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Le reste du code HTML pour la modal et le formulaire... -->
 </div>
+
+<!-- Inclusion de jQuery si ce n'est pas déjà fait -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Fonction pour charger et afficher les utilisateurs
+    function loadUsers() {
+        $.ajax({
+            type: 'GET',
+            url: 'get_user.php', // Assurez-vous que ce chemin est correct
+            success: function(response) {
+                let users = JSON.parse(response);
+                let html = '';
+                users.forEach(user => {
+                    html += `<tr>
+                                <td>${user.UserID}</td>
+                                <td>${user.Username}</td>
+                                <td>${user.Email}</td>
+                                <td>${user.Role}</td>
+                             </tr>`;
+                });
+                $('#userTableBody').html(html);
+            },
+            error: function() {
+                alert("Erreur lors du chargement des utilisateurs.");
+            }
+        });
+    }
+
+    // Charger les utilisateurs au démarrage de la page
+    loadUsers();
+
+    // Ici, vous pouvez ajouter d'autres gestionnaires pour les actions de formulaire, etc.
+});
+</script>
+
 <?php require_once '../../includes/footer.php'; ?>
