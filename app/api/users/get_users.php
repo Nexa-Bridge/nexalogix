@@ -1,5 +1,5 @@
 <?php
-require '/app/api/db.php';
+require '/app/admin/php/database.php';
 
 $stmt = $pdo->query("SELECT * FROM Users");
 $users = $stmt->fetchAll();
