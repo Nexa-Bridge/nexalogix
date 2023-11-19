@@ -5,7 +5,7 @@ $(document).ready(function() {
             url: 'http://nexalogix.nexabridge.net/api/users/get_user.php',
             dataType: 'json', // Assurez-vous que la réponse est traitée comme du JSON
             success: function(users) {
-                console.log(users);
+                console.log('Teeeeesttttttt stttetttstt tttstt ' + '        ' +users);
                 let html = '';
                 users.forEach(user => {
                     html += `<tr>
