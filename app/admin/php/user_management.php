@@ -45,7 +45,4 @@ if (!isLoggedIn() || !isAdmin()) {
     <!-- Le reste du code HTML pour la modal et le formulaire... -->
 </div>
 
-<!-- Inclusion du fichier JavaScript pour la gestion des utilisateurs -->
-<script src="../js/userManagement.js"></script>
-
 <?php require_once '../../includes/footer.php'; ?>
