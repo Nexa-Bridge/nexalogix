@@ -9,6 +9,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/app/admin/css/custom.css">
     <script src="/app/admin/js/user_management.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 
