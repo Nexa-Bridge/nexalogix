@@ -27,7 +27,7 @@ if (!isLoggedIn() || !isAdmin()) {
 
     <!-- User Table -->
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="usersTable">
             <thead>
             <tr>
             <th>ID</th>
@@ -36,7 +36,7 @@ if (!isLoggedIn() || !isAdmin()) {
             <th>Role</th>
             </tr>
             </thead>
-            <tbody id="userTableBody">
+            <tbody>
                 <!-- Les utilisateurs seront chargés ici via AJAX -->
             </tbody>
         </table>
