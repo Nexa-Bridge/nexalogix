@@ -13,9 +13,7 @@ $(document).ready(function() {
                                 <td>${user.UserID}</td>
                                 <td>${user.Username}</td>
                                 <td>${user.Email}</td>
-                                <td>
-                                    <!-- Ici, vous pouvez ajouter des boutons ou des liens pour la mise à jour/suppression -->
-                                </td>
+                                
                              </tr>`;
                 });
                 $('#userTableBody').html(html);
