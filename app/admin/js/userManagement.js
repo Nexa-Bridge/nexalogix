@@ -4,20 +4,19 @@ $(document).ready(function() {
         $.ajax({
             type: 'GET',
             url: 'http://nexalogix.nexabridge.net/api/users/get_user.php',
-            success: function(response) {
-                // Supposition que la réponse est en JSON
-                let users = JSON.parse(response);
+            success: function(users) { // 'users' est déjà un objet JavaScript si la réponse est du JSON
                 let html = '';
                 users.forEach(user => {
                     html += `<tr>
                                 <td>${user.UserID}</td>
                                 <td>${user.Username}</td>
                                 <td>${user.Email}</td>
-                                
+                                <td>
+                                    <!-- Ici, vous pouvez ajouter des boutons ou des liens pour la mise à jour/suppression -->
+                                </td>
                              </tr>`;
                 });
                 $('#userTableBody').html(html);
-
             },
             error: function(xhr, status, error) {
                 console.error("Erreur AJAX : ", status, error, xhr.responseText);
