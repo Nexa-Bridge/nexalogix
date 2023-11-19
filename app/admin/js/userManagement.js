@@ -3,7 +3,7 @@ $(document).ready(function() {
     function loadUsers() {
         $.ajax({
             type: 'GET',
-            url: '/api/users/get_user.php', 
+            url: 'http://nexalogix.nexabridge.net/api/users/get_user.php',
             success: function(response) {
                 // Supposition que la réponse est en JSON
                 let users = JSON.parse(response);
@@ -32,3 +32,6 @@ $(document).ready(function() {
 
     // Ici, vous pouvez ajouter d'autres fonctions pour la création, la mise à jour et la suppression des utilisateurs
 });
+
+
+
