@@ -13,7 +13,6 @@
     <script src="/app/admin/js/userManagement.js"></script>
 
     <!-- Custom JS -->
-    <script src="/app/admin/js/custom.js"></script> 
     <script src="/app/admin/js/jquery.js"></script>
 
     <script>
