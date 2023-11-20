@@ -20,7 +20,6 @@ if (!isLoggedIn() || !isAdmin()) {
 <div class="container mt-5">
     <h1 class="mb-4">Gestion des Utilisateurs</h1>
 
-    Button to trigger modal for adding a new user 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
         Add New User
     </button>
@@ -52,8 +51,34 @@ if (!isLoggedIn() || !isAdmin()) {
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addUserForm">
-                <!-- Form Fields for Username, Email, etc. -->
+            <form id="addUserForm">
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <!-- Role Selection Dropdown -->
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                    <!-- Add more roles as needed -->
+                    </select>
+                </div>
                 </form>
             </div>
             <div class="modal-footer">
