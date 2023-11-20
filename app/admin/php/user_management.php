@@ -64,12 +64,11 @@ if (!isLoggedIn() || !isAdmin()) {
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email">
                 </div>
-                <button type="submit" class="btn btn-primary">Add User</button>
             </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addUser()">Save User</button>
+                <button type="submit" class="btn btn-primary" onclick="addUser()">Save User</button>
             </div>
             </div>
         </div>

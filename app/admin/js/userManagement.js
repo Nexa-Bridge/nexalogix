@@ -3,7 +3,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'GET',
             url: 'http://nexalogix.nexabridge.net/api/users/get_user.php',
-            dataType: 'json', // Assurez-vous que la réponse est traitée comme du JSON
+            dataType: 'json',
             success: function(users) {
                 let html = '';
                 users.forEach(user => {
@@ -29,7 +29,7 @@ $(document).ready(function() {
       
         $.ajax({
           type: 'POST',
-          url: 'http://nexalogix.nexabridge.net/api/users/create_user.php', // Path to your PHP script
+          url: 'http://nexalogix.nexabridge.net/api/users/create_user.php', 
           data: userData,
           success: function(response) {
             // Handle success (maybe refresh user list or show a message)
