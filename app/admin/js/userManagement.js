@@ -24,5 +24,21 @@ $(document).ready(function() {
         });
     }
 
+    function addUser() {
+        const userData = $("#addUserForm").serialize(); // Serialize form data
+      
+        $.ajax({
+          type: 'POST',
+          url: 'path_to/create_user.php', // Path to your PHP script
+          data: userData,
+          success: function(response) {
+            // Handle success (maybe refresh user list or show a message)
+          },
+          error: function() {
+            // Handle error
+          }
+        });
+      }
+
     loadUsers();
 });
