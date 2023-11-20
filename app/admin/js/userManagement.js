@@ -29,7 +29,7 @@ $(document).ready(function() {
       
         $.ajax({
           type: 'POST',
-          url: 'path_to/create_user.php', // Path to your PHP script
+          url: 'http://nexalogix.nexabridge.net/api/users/create_user.php', // Path to your PHP script
           data: userData,
           success: function(response) {
             // Handle success (maybe refresh user list or show a message)
