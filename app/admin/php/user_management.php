@@ -51,35 +51,21 @@ if (!isLoggedIn() || !isAdmin()) {
                 </button>
             </div>
             <div class="modal-body">
-            <form id="addUserForm">
-                <!-- Username Field -->
+            <form id="addUserForm" method="POST" action="path_to/add_user.php">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
                 </div>
-
-                <!-- Email Field -->
                 <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-
-                <!-- Password Field -->
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
-
-                <!-- Role Selection Dropdown -->
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control" id="role" name="role">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                    <!-- Add more roles as needed -->
-                    </select>
-                </div>
-                </form>
+                <button type="submit" class="btn btn-primary">Add User</button>
+            </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

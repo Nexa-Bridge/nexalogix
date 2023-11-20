@@ -1,23 +1,31 @@
 <?php
-require '../db.php'; // Database connection
+require '../db.php'; // Adjust the path as needed to your database connection file
 
-// Get POST data and sanitize
-$username = $_POST['username'];
-$email = $_POST['email'];
-// ... other fields
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect and sanitize input data
+    $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
+    $password = !empty($_POST['password']) ? trim($_POST['password']) : null;
+    $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
 
-// SQL to insert user
-$sql = "INSERT INTO Users (Username, Email, ...) VALUES (:username, :email, ...)";
-$stmt = $pdo->prepare($sql);
+    // Password hashing
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-// Bind parameters and execute
-$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-// ... other bindings
+    // Prepare SQL query to insert new user
+    $sql = "INSERT INTO Users (Username, PasswordHash, Email) VALUES (:username, :password, :email)";
+    $stmt = $pdo->prepare($sql);
 
-if($stmt->execute()) {
-    echo json_encode(['success' => 'User created successfully']);
-} else {
-    echo json_encode(['error' => 'Failed to create user']);
+    // Bind parameters
+    $stmt->bindValue(':username', $username);
+    $stmt->bindValue(':password', $passwordHash);
+    $stmt->bindValue(':email', $email);
+
+    // Execute the statement and check if it's successful
+    if($stmt->execute()){
+        echo "New user added successfully.";
+    } else {
+        echo "An error occurred.";
+    }
 }
+
 ?>
