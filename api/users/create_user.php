@@ -21,7 +21,7 @@ function createUser($pdo) {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepare SQL query to insert new user
-        $sql = "INSERT INTO Users (Username, PasswordHash, Email) VALUES (:username, :password, :email)";
+        $sql = "INSERT INTO Users (Username, PasswordHash, Email) VALUES (:username, :'password', :email)";
         $stmt = $pdo->prepare($sql);
 
         // Bind parameters
