@@ -13,7 +13,7 @@ $(document).ready(function() {
                                 <td>${user.Email}</td>
                                 <td></td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary" onclick="updateUserModal(${user.UserID})">Update</button>
+                                    <button type="button" class="btn btn-sm btn-primary updateUserModalButton" data-userid="${user.UserID}">Update</button>
                                 </td>
                              </tr>`;
                 });
@@ -66,8 +66,12 @@ $(document).ready(function() {
             }
         });
         $('#updateUserButton').on('click', updateUser);
+        
     }
-    
-
     loadUsers();
+});
+
+$(document).on('click', '.updateUserModalButton', function() {
+    var userId = $(this).data('userid');
+    updateUserModal(userId);
 });
