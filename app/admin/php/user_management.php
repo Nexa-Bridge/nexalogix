@@ -51,7 +51,7 @@ if (!isLoggedIn() || !isAdmin()) {
                 </button>
             </div>
             <div class="modal-body">
-            <form id="addUserForm" method="POST" action="http://nexalogix.nexabridge.net/api/users/create_user.php">
+            <form id="addUserForm" method="POST">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" class="form-control" id="username" name="username" required>
@@ -68,7 +68,7 @@ if (!isLoggedIn() || !isAdmin()) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary" onclick="addUser()">Enregistrer</button>
+                <button type="button" class="btn btn-primary" onclick="addUser()">Enregistrer</button>
             </div>
             </div>
         </div>
