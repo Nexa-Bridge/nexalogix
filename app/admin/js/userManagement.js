@@ -45,11 +45,21 @@ $(document).ready(function() {
         });
     }
 
+    function updateUserModal(userId) {
+        // Fetch user data based on userId, or if the data is already in the page, extract it
+        // Assuming you have the user's data, populate the modal fields
+        $('#updateUserId').val(userId);
+        // ... populate other fields ...
+    
+        // Open the modal
+        $('#updateUserModal').modal('show');
+    }
+
     function updateUser(event) {
         event.preventDefault(); // Prevent the default form submission
-
-        var formData = $("#updateUserForm").serialize(); // Serialize form data from the update form
-
+    
+        var formData = $("#updateUserForm").serialize();
+    
         $.ajax({
             type: 'POST',
             url: 'http://nexalogix.nexabridge.net/api/users/update_user.php',
@@ -57,6 +67,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log("User updated successfully");
                 loadUsers(); // Refresh the user list
+                $('#updateUserModal').modal('hide'); // Close the modal
             },
             error: function() {
                 console.error("Error updating user");
