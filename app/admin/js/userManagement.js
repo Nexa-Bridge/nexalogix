@@ -44,34 +44,36 @@ $(document).ready(function() {
             }
         });
     }
-    // Attaching event listener to the Add User button
-    $('#addUserButton').on('click', addUser);
 
     function updateUser(event) {
         event.preventDefault(); // Prevent the default form submission
-    
+
         var formData = $("#updateUserForm").serialize(); // Serialize form data from the update form
-    
+
         $.ajax({
             type: 'POST',
-            url: 'http://nexalogix.nexabridge.net/api/users/update_user.php', // Adjust with the correct path
+            url: 'http://nexalogix.nexabridge.net/api/users/update_user.php',
             data: formData,
             success: function(response) {
                 console.log("User updated successfully");
-                // Additional actions on success (e.g., refreshing the user list, closing the modal)
-                loadUsers();
+                loadUsers(); // Refresh the user list
             },
             error: function() {
                 console.error("Error updating user");
             }
         });
-        $('#updateUserButton').on('click', updateUser);
-        
     }
-    loadUsers();
-});
 
-$(document).on('click', '.updateUserModalButton', function() {
-    var userId = $(this).data('userid');
-    updateUserModal(userId);
+    // Initialize the user list
+    loadUsers();
+
+    // Event Listeners
+    $('#addUserButton').on('click', addUser);
+    $('#updateUserButton').on('click', updateUser);
+
+    // Delegated event listener for dynamically added elements
+    $(document).on('click', '.updateUserModalButton', function() {
+        var userId = $(this).data('userid');
+        updateUserModal(userId); // Ensure this function is defined
+    });
 });
