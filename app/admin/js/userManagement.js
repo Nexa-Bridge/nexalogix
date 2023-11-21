@@ -13,7 +13,7 @@ $(document).ready(function() {
                                 <td>${user.Email}</td>
                                 <td></td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary" onclick="populateUpdateModal(${user.UserID})">Update</button>
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="updateUserModal(${user.UserID})">Update</button>
                                 </td>
                              </tr>`;
                 });
