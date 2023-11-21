@@ -25,24 +25,27 @@ $(document).ready(function() {
     }
 
     function addUser(event) {
-        event.preventDefault(); // Prevent the default form submission
-    
+        event.preventDefault(); // Prevent default form submission
+
         var formData = $("#addUserForm").serialize(); // Serialize form data
-    
+
         $.ajax({
             type: 'POST',
-            url: 'http://nexalogix.nexabridge.net/api/users/create_user.php', // Adjust with the correct path
+            url: 'http://nexalogix.nexabridge.net/api/users/create_user.php',
             data: formData,
             success: function(response) {
-                // Handle success - maybe display a message or refresh the page
                 console.log("User added successfully");
+                // Consider calling loadUsers() again to refresh the list
+                loadUsers();
             },
             error: function() {
-                // Handle error
                 console.error("Error adding user");
             }
         });
     }
+
+    // Attaching event listener to the Add User button
+    $('#addUserButton').on('click', addUser);
 
     loadUsers();
 });
