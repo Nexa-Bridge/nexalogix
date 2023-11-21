@@ -27,7 +27,7 @@ $(document).ready(function() {
     function addUser(event) {
         event.preventDefault(); // Prevent the default form submission
     
-        var formData = $("#addUserModal").serialize(); // Serialize form data
+        var formData = $("#addUserForm").serialize(); // Serialize form data
     
         $.ajax({
             type: 'POST',
