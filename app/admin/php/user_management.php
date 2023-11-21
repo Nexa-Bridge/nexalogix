@@ -28,12 +28,13 @@ if (!isLoggedIn() || !isAdmin()) {
     <div class="table-responsive">
         <table class="table table-striped" id="usersTable">
             <thead>
-            <tr>
-            <th>ID</th>
-            <th>Nom d'utilisateur</th>
-            <th>Email</th>
-            <th>Role</th>
-            </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody id="userTableBody"></tbody>
                 <!-- Les utilisateurs seront chargés ici via AJAX -->
