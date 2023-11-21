@@ -11,8 +11,9 @@ $(document).ready(function() {
                                 <td>${user.UserID}</td>
                                 <td>${user.Username}</td>
                                 <td>${user.Email}</td>
+                                <td></td>
                                 <td>
-                                    <!-- Ici, des boutons ou liens pour la mise à jour/suppression peuvent être ajoutés -->
+                                    <button type="button" class="btn btn-sm btn-primary" onclick="populateUpdateModal(${user.UserID})">Update</button>
                                 </td>
                              </tr>`;
                 });
@@ -43,9 +44,30 @@ $(document).ready(function() {
             }
         });
     }
-
     // Attaching event listener to the Add User button
     $('#addUserButton').on('click', addUser);
+
+    function updateUser(event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        var formData = $("#updateUserForm").serialize(); // Serialize form data from the update form
+    
+        $.ajax({
+            type: 'POST',
+            url: 'http://nexalogix.nexabridge.net/api/users/update_user.php', // Adjust with the correct path
+            data: formData,
+            success: function(response) {
+                console.log("User updated successfully");
+                // Additional actions on success (e.g., refreshing the user list, closing the modal)
+                loadUsers();
+            },
+            error: function() {
+                console.error("Error updating user");
+            }
+        });
+        $('#updateUserButton').on('click', updateUser);
+    }
+    
 
     loadUsers();
 });
