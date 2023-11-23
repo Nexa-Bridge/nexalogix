@@ -46,14 +46,30 @@ $(document).ready(function() {
     }
 
     function updateUserModal(userId) {
-        // Fetch user data based on userId, or if the data is already in the page, extract it
-        // Assuming you have the user's data, populate the modal fields
-        $('#updateUserId').val(userId);
-        // ... populate other fields ...
+        // AJAX call to fetch user data
+        $.ajax({
+            type: 'GET',
+            url: 'http://nexalogix.nexabridge.net/api/users/get_user_details.php', // URL to your API endpoint that returns user data
+            data: { userId: userId },
+            success: function(response) {
+                // Assuming the response is the user data object
+                // Populate the form fields with the user data
+                $('#updateUserId').val(response.UserID);
+                $('#updateUsername').val(response.Username);
+                $('#updateEmail').val(response.Email);
     
-        // Open the modal
-        $('#updateUserModal').modal('show');
+                // If there are other fields to populate, do it here
+                // ...
+    
+                // Open the modal
+                $('#updateUserModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching user data: ", status, error, xhr.responseText);
+            }
+        });
     }
+    
 
     function updateUser(event) {
         event.preventDefault(); // Prevent the default form submission
